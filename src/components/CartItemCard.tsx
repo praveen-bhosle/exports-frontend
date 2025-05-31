@@ -1,13 +1,16 @@
-import type { Product } from '../interfaces/Product'
+import { useCartQueryMutations } from '../hooks/useCartQueryMutations';
+import type { CartItem } from '../interfaces/CartItem';
 import ProductCard2 from './ProductCard2'
 
-const CartItem = ({ quantity, product
-}: {
-    quantity: number,
-    product: Product
+const CartItemCard = ({ cartItem, id }: {
+    cartItem: CartItem, id: number
 }) => {
 
-    const priceInINR = parseInt(product.price) * 80;
+
+    const { putMutation, deleteMutation } = useCartQueryMutations();
+
+    const product = cartItem.product;
+    const quantity = cartItem.quantity;
 
     return (
         <>
@@ -18,7 +21,7 @@ const CartItem = ({ quantity, product
 
                 <div className=' p-2 w-[300px] '>
                     <div className='text-gray-800 font-bold text-sm '>
-                        ${product.price} || ₹{priceInINR}
+                        ${product.price} || ₹{product.price * 80}
                     </div>
 
                     <div className='text-black font-bold text-sm  '>
@@ -33,28 +36,28 @@ const CartItem = ({ quantity, product
                         <div className='flex align-center'>
                             <button
                                 onClick={() => {
-                                    addToCart(product.productId)
+                                    putMutation.mutate({ cartItemId: id, quantity: quantity + 100 });
                                 }}
                                 className='bg-gray-200 rounded-md mr-2'
                             >
-                                <img src='/plus.svg' width={25} height={25} alt='image' />
+                                <img src='/minus.svg' width={25} height={25} alt='image' />
                             </button>
                             <span className='text-black text-2xl font-bold select-none '>
                                 {quantity}
                             </span>
                             <button
                                 onClick={() => {
-                                    removeOneFromCart(product.productId)
+                                    putMutation.mutate({ cartItemId: id, quantity: quantity - 100 })
                                 }}
                                 className='bg-gray-200 rounded-md ml-2'
                             >
-                                <img src='/minus.svg' width={25} height={25} alt='image' />
+                                <img src='/plus.svg' width={25} height={25} alt='image' />
                             </button>
                         </div>
 
                         <button
                             onClick={() => {
-                                removeFromCart(product.productId)
+                                deleteMutation.mutate(id)
                             }}
                             className='block'
                         >
@@ -68,4 +71,4 @@ const CartItem = ({ quantity, product
     )
 }
 
-export default CartItem
+export default CartItemCard

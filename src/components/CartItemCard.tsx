@@ -6,7 +6,6 @@ const CartItemCard = ({ cartItem, id }: {
     cartItem: CartItem, id: number
 }) => {
 
-
     const { putMutation, deleteMutation } = useCartQueryMutations();
 
     const product = cartItem.product;

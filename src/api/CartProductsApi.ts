@@ -1,39 +1,30 @@
-import axios from 'axios'
 import type { CartItem } from '../interfaces/CartItem'
+import { AxiosRequest } from './AxiosApiHandler'
 
-const url = process.env.backend_url + '/api/user/cart'
+const url =   '/api/user/cart'
 
 export const getCartItems = async () => {
-  const cartItems: CartItem[] = await axios.get(url).then(res => res.data)
-  return cartItems
-}
+    const response  = await AxiosRequest( { url  ,  method : 'get'} ) ; 
+    if(response===undefined) { 
+      return  { success :  false }  ; 
+    } 
+    else { 
+      const cartItems: CartItem[] = response.data ;  
+      return   { success : true ,  cartItems }  ;
+    }
+ }
 
-export const createCartItem = async (productId: number) => {
-  try {
-    await axios.post(url + `/${productId}`).then(res => res.data)
-  } catch (e) {
-    console.error(JSON.stringify(e))
-  }
+export const createCartItem = async (productId: number) => { 
+  const response  = await AxiosRequest( { url :  url  + productId   ,  method : 'post'} ) ; 
+  return response !== undefined ;
 }
 
 export const deleteCartItem = async (cartItemId: number) => {
-  try {
-    await axios.delete(url + `${cartItemId}`).then(res => res.data)
-  } catch (e) {
-    console.error(JSON.stringify(e))
-  }
+  const response  = await AxiosRequest( { url :  url  + cartItemId   ,  method : 'delete'} ) ; 
+  return response !== undefined ;
 }
 
-export const editCartItem = async ({
-  cartItemId: id,
-  quantity: quanity
-}: {
-  cartItemId: number
-  quantity: number
-}) => {
-  try {
-    await axios.put(url, { id, quanity }).then(res => res.data)
-  } catch (e) {
-    console.error(JSON.stringify(e))
-  }
+export const editCartItem = async ({cartItemId: id , quantity: quantity }: { cartItemId: number ,quantity: number}) => {
+  const response  = await AxiosRequest( { url  ,  body : { id, quantity } ,  method : 'put'} ) ; 
+  return response !== undefined ;
 }

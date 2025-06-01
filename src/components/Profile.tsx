@@ -9,7 +9,7 @@ const Profile = () => {
         return (
             <div className='h-[70vh] flex  justify-center  items-center'>
                 <div className='p-4 m-2  bg-white  border-[1px]  rounded-md text-black '>
-                    <form action={ }
+                    <form 
                         className='flex flex-col gap-2' >
                         <Input id='First Name' placeholder={profile.firstName} />
                         <Input id='Last Name' placeholder={profile.lastName} />
@@ -30,7 +30,7 @@ const Profile = () => {
     return (
         <div className='h-[70vh] flex  justify-center  items-center'>
             <div className='p-4 m-2  bg-white  border-[1px]  rounded-md text-black '>
-                <form action={submitForm}
+                <form 
                     className='flex flex-col gap-2 ' >
                     <Input id='First Name' />
                     <Input id='Last Name' />

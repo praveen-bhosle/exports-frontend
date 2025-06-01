@@ -1,7 +1,6 @@
-import { useStore } from "../state/Store"
+
 
 const Input = ({ id, placeholder }: { id: string, placeholder?: string }) => {
-    const { user } = useStore();
 
     return (
         <div className='flex justify-between  gap-4'>

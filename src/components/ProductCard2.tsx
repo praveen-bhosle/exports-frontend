@@ -41,7 +41,7 @@ const ProductCard2 = ({ element }: { element: Product }) => {
                 itemClass="carousel-item-padding-40-px"
                 className='carousel-container z-0'
             >
-                {element.image.map((e, index) =>
+                {element.image?.map((e, index) =>
                     <div key={index}>   <img src={e} width={0} height={0} sizes="100vw" className='w-full h-auto rounded-[5px]' /></div>
                 )
                 }

@@ -3,20 +3,21 @@ import { getProducts } from "../api/ProductsApi";
 import ProductCard from "./ProductCard";
 
 import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header3 } from "./Header3";
 
-
 import ProductsLoading from "./ProductsLoading";
-
 
 const Products = () => {
     const query = useQuery({ queryKey: ['products'], queryFn: getProducts })
     const [searchParams, setSearchParams] = useSearchParams();
-    const [quality, setQuality] = useState(searchParams?.get('quality') ? searchParams?.get('quality') : 'handpicked');
+    const [quality, setQuality] = useState(searchParams?.get('quality') ? searchParams?.get('quality') : 'handpicked');  
+    useEffect( () => { 
+    if(quality) {searchParams.set( 'quality' , quality ) ; setSearchParams(searchParams) ;  } 
+    } ,  [ quality ] ) ; 
 
-    //@ts-ignore
-    const products = query.data.filter(product => product.quality === quality);
+    
+    const products = query.data ?  query.data.filter(product => product.quality === quality) : [ ];
 
     if (query.status === 'pending') {
         return (

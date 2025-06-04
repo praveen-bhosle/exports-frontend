@@ -16,7 +16,7 @@ const Cart = () => {
                         Shopping Cart {`(${totalItems})`}
                     </span>
                     <button
-                        onClick={() => setIsCartOpen(false)}
+                        onClick={() => setIsCartOpen(false)} 
                         className='hover:bg-gray-100 rounded-md'
                     >
                         <img src='/close.svg' width={25} height={25} alt='close' />

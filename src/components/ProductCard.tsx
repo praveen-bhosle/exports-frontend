@@ -2,6 +2,10 @@ import { Suspense } from 'react'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import type { Product } from '../interfaces/Product';
+import { useStore } from '../state/Store';
+import { useCartQueryMutations } from '../hooks/useCartQueryMutations';
+import Loading from './Loading';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ element }: { element: Product }) => {
 
@@ -23,6 +27,14 @@ const ProductCard = ({ element }: { element: Product }) => {
             items: 1
         }
     };
+ 
+    
+    const  { setIsCartOpen }   = useStore() ; 
+
+    const {  postMutation }  = useCartQueryMutations( ) ;  
+
+    const navigate  = useNavigate() ; 
+
 
     return (
 
@@ -47,7 +59,7 @@ const ProductCard = ({ element }: { element: Product }) => {
                         itemClass="carousel-item-padding-40-px"
                         className='carousel-container z-0'
                     >
-                        {element.image.map((e, index) =>
+                        {element.image?.map((e, index) =>
                             <div key={index}>   <img src={e} alt='' width={0} height={0} sizes="100vw" className='w-full h-auto rounded-[5px]' /></div>
                         )
                         }
@@ -56,7 +68,7 @@ const ProductCard = ({ element }: { element: Product }) => {
             </div>
 
             <div className='basis-1/5 '>
-                <a className='text-xl   font-bold text-black  hover:underline hover:cursor-pointer ' onClick={() => { router.push(`/app/product?productId=${element.productId}`) }} > {element.sizeStringA} </a> <br />
+                <a className='text-xl   font-bold text-black  hover:underline hover:cursor-pointer ' onClick={() => { navigate(`/app/products?productId=${element.productId}`) }} > {element.sizeStringA} </a> <br />
                 <span className='text-sm  '> {element.sizeStringB} </span> <br />
                 <span className='text-sm  font-semibold select-none'>
                     {element.price}
@@ -66,17 +78,8 @@ const ProductCard = ({ element }: { element: Product }) => {
             <div className='basis-1/20'>
                 <button
                     onClick={() => {
-                        addToCart(element.productId)
-                        cartOpen()
-                    }}
-                    className='bg-black text-white rounded-[12px] px-2 py-[1px]  w-[100%]'
-                >
-                    Add to cart
-                </button>
-                <button
-                    onClick={() => {
-                        addToCart(element.productId)
-                        cartOpen()
+                       postMutation.mutate(element.productId) 
+                       setIsCartOpen(true) ; 
                     }}
                     className='bg-black text-white rounded-[12px] px-2 py-[1px]  w-[100%]'
                 >

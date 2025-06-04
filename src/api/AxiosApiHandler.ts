@@ -1,6 +1,6 @@
 import axios, { isAxiosError } from 'axios'
 
-const baseURL = '' ;
+const baseURL = import.meta.env.VITE_BACKEND_URL ;
 
 export const AxiosRequest = async ({url,body, method  }: {url: string , body?: {} ,method: string }) => {
   try {  

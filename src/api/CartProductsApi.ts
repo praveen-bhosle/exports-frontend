@@ -1,7 +1,7 @@
 import type { CartItem } from '../interfaces/CartItem'
 import { AxiosRequest } from './AxiosApiHandler'
 
-const url =   '/api/user/cart'
+const url =   '/user/cart'
 
 export const getCartItems = async () => {
     const response  = await AxiosRequest( { url  ,  method : 'get'} ) ; 

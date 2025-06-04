@@ -15,22 +15,22 @@ const LandingPage = () => {
                         <div className='border-black '>
                             <div className='text-2xl font-bold  text-black mb-2   lg:text-4xl  xl:text-6xl  text-custom-subheading'> Products </div>
                             <div className='flex flex-col gap-4  w-full items-center md:grid md:grid-cols-2 md:justify-items-start  md:items-start lg:grid   lg:grid-cols-3'>
-                                <div className='bg-[#FFF5F0] border-[1px] border-[1px] p-2 rounded-md cursor-pointer w-full flex flex-col gap-2 sm:gap-4   ' onClick={() => navigate('/app?option=0')}    >
+                                <div className='bg-[#FFF5F0] border-[1px] border-[1px] p-2 rounded-md cursor-pointer w-full flex flex-col gap-2 sm:gap-4   ' onClick={() => navigate('/app/products?quality=handpicked')}    >
                                     <div className='text-custom-subheading font-bold  text-lg  w-max '>  Handpicked  Makhana </div>
                                     <div className=' font-bold text-xs '> Carefully selected for superior quality, handpicked makhana offers unmatched taste, purity, and freshness, ensuring the best snacking and health  experience.    </div>
                                     <img src='/handpickedMakhana.jpeg' className='rounded-md' width={600} height={400} alt='' />
                                 </div>
-                                <div className='bg-[#F0F8FF] border-[1px] p-2   rounded-md cursor-pointer  w-full   ' onClick={() => { navigate('/app?option=1') }}>
+                                <div className='bg-[#F0F8FF] border-[1px] p-2   rounded-md cursor-pointer  w-full   ' onClick={() => { navigate('/app/products?quality=semi-handpicked') }}>
                                     <div className='  rounded-md cursor-pointer w-full    aspect-[4/3] flex flex-col gap-2 sm:gap-4    ' onClick={() => navigate('/app?option=0')}    >
                                         <div className='text-custom-subheading font-bold  text-lg  w-max '>  Semi Handpicked  Makhana </div>
-                                        <div className=' font-bold text-xs '>  Partially screened for better quality, semi-handpicked makhana balances affordable and refinement , delivering a satisfying snacking option. </div>
+                                        <div className=' font-bold text-xs '>  Partially screened for better quality, semi-handpicked makhana balances affordability and refinement , delivering a satisfying snacking option. </div>
                                         <img src='/semihandpicked.jpg' className='rounded-md' width={600} height={400} alt='' />
                                     </div>
                                 </div>
-                                <div className='bg-[#FFF0F5] border-[1px] p-2 rounded-md cursor-pointer w-full flex flex-col gap-2  sm:gap-4   ' onClick={() => { navigate('/app?option=2') }} >
-                                    <div className='text-custom-subheading font-bold  text-lg  w-max  '>  Non Handpicked  Makhana </div>
+                                <div className='bg-[#FFF0F5] border-[1px] p-2 rounded-md cursor-pointer w-full flex flex-col gap-2  sm:gap-4   ' onClick={() => { navigate('/app/products?quality=machine-picked') }} >
+                                    <div className='text-custom-subheading font-bold  text-lg  w-max  '> Machine Picked  Makhana </div>
                                     <div className=' font-bold text-xs'>  Standard quality makhana processed in bulk,offering an economical option with a good taste and nutrition for everyday use.  </div>
-                                    <img src='/handpicked.jpg' className='rounded-md' width={600} height={400} alt='' />
+                                    <img src='/handpicked.jpg' className='rounded-md' width='600px' height='400px' alt='' />
                                 </div>
                             </div>
                         </div>

@@ -13,9 +13,11 @@ import About from './components/About.tsx'
 import Profile from './components/Profile.tsx'
 import Products from './components/Products.tsx'
 import VerifyEmail from './components/VerifyEmail.tsx'
+import AuthLayout from './layouts/AuthLayout.tsx'
 
 
 const queryClient = new QueryClient();
+
 
 
 
@@ -32,8 +34,8 @@ createRoot(document.getElementById('root')!).render(
               <Route path="profile" element={<Profile />} />
             </Route>
           </Route>
-          <Route path="/auth"  >
-            <Route path="signin" element={<Signin />} />
+          <Route path="/auth"  element = { <AuthLayout/>} >
+            <Route path="login" element={<Signin />} />
             <Route path="signup" element={<Signup />} />
             <Route path='verifyEmail' element =  { <VerifyEmail/> } />
           </Route>

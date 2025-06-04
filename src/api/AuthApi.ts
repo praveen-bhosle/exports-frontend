@@ -7,9 +7,11 @@ export const login = async ({username, password}: {username: string ,password: s
         return false ;
     }
     if(response!=undefined) {  
-        const authorizationHeader = response.headers['Authorization'] ; 
-        const token  = authorizationHeader.split(' ')[1] ; 
-        localStorage.setItem( 'YKDAuthToken' , token ) ; 
+       console.log(response.data) ;
+        const  { token   } = response.data ;  
+        console.log(token) ; 
+        localStorage.setItem('YKDAuthToken' , token ) ; 
+        localStorage.setItem('YKDUsername'  , username  ) ; 
         return true ; 
      }
 }
@@ -17,6 +19,7 @@ export const login = async ({username, password}: {username: string ,password: s
 export const logout = async () => { 
   try {
     localStorage.removeItem('YKDAuthToken') ;
+    localStorage.removeItem('YKDUsername') ; 
   } catch (e) {
     console.log(e); 
   }
@@ -27,7 +30,7 @@ export const signup = async ( { username  , password } : { username : string , p
     return response !== undefined ; 
 }
 
-export const verifyEmailApi = async (  email : string   )  => {  
+export const verifyEmailApi = async (  email : string   )  => {   
     const response = await AxiosRequest( { method : 'post' , url:'/user/verifyEmail' ,  body : { email }})  ;   
     return  response !== undefined ;
 } 

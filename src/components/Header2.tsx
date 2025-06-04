@@ -16,7 +16,7 @@ const Header2 = () => {
         <div className='border  w-full fixed  bg-white  top-[0px] left-[0px] z-10'>
             <div className='flex justify-between  mb-2  align-center mx-4 mt-[9px] h-[30px] '>
                 <div className='flex  gap-4  border-2 border-white'>
-                    {user.loggedIn ?
+                    {user.username ?
                         <button className=' rounded-[25px]  overflow-hidden' onClick={
                             () => {
                                 setIsProfileBarOpen(!isProfileBarOpen);
@@ -50,8 +50,9 @@ const Header2 = () => {
                 <div className='flex gap-2'>
                     <div>
                         <button
-                            onClick={() => {
-                                setIsCartOpen(true)
+                            onClick={() => { 
+                                if( user.username ) setIsCartOpen(true) 
+                                else { alert('You must login to access cart.')} 
                             }}>
                             <img src='/cart.svg' alt='cart' width={25} height={25} />
                         </button>

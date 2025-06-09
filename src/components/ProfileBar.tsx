@@ -18,7 +18,7 @@ const ProfileBar = () => {
             <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer'> My orders   </div>
             <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer'  > Settings </div>
             <div className=' w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md cursor-pointer'
-                onClick={async () => { await axios.put('/api/user/logout'); setUser({ loggedIn: false }) }}
+                onClick={async () => { await axios.put('/api/user/logout'); setUser({  username : null}) }}
             > Log out  </div>
         </div>
     )

@@ -7,7 +7,7 @@ import { useCartQueryMutations } from '../hooks/useCartQueryMutations';
 import Loading from './Loading';
 import { useNavigate } from 'react-router-dom';
 
-const ProductCard = ({ element }: { element: Product }) => {
+const ProductCard = ({ element    }: { element: Product   }) => {
 
     const responsive = {
         superLargeDesktop: {
@@ -29,16 +29,17 @@ const ProductCard = ({ element }: { element: Product }) => {
     };
  
     
-    const  { setIsCartOpen }   = useStore() ; 
+    const  { setIsCartOpen , user  }   = useStore() ; 
 
     const {  postMutation }  = useCartQueryMutations( ) ;  
 
-    const navigate  = useNavigate() ; 
+    const navigate  = useNavigate() ;   
 
-
+ 
+    
     return (
 
-        <div className='flex flex-col gap-2  rounded-[8px] p-[4px] shadow-custom hover:shadow-hoverCustom  transition:shadow  '>
+        <div className='flex flex-col gap-2  rounded-[8px] p-[4px] shadow-custom hover:shadow-hoverCustom  transition:shadow  border-black border-[2px] sm:border-[3px] md:border-[4px] '>
 
             <div className='basis-3/4'>
 
@@ -59,8 +60,10 @@ const ProductCard = ({ element }: { element: Product }) => {
                         itemClass="carousel-item-padding-40-px"
                         className='carousel-container z-0'
                     >
-                        {element.image?.map((e, index) =>
-                            <div key={index}>   <img src={e} alt='' width={0} height={0} sizes="100vw" className='w-full h-auto rounded-[5px]' /></div>
+                        {element.image?.map((e, index) =>  {
+                            return ( 
+                            <div key={index}>   <img src= {'/'+e} alt='' width={0} height={0} sizes="100vw" className='w-full h-auto rounded-[5px]' /></div>  ) 
+                            } 
                         )
                         }
                     </Carousel>
@@ -68,8 +71,8 @@ const ProductCard = ({ element }: { element: Product }) => {
             </div>
 
             <div className='basis-1/5 '>
-                <a className='text-xl   font-bold text-black  hover:underline hover:cursor-pointer ' onClick={() => { navigate(`/app/products?productId=${element.productId}`) }} > {element.sizeStringA} </a> <br />
-                <span className='text-sm  '> {element.sizeStringB} </span> <br />
+                <a className='text-xl   font-bold text-black  hover:underline hover:cursor-pointer ' onClick={() => { navigate(`/app/products?productId=${element.id}`) }} > {element.sizeA} </a> <br />
+                <span className='text-sm  '> {element.sizeB} </span> <br />
                 <span className='text-sm  font-semibold select-none'>
                     {element.price}
                 </span>
@@ -77,14 +80,19 @@ const ProductCard = ({ element }: { element: Product }) => {
 
             <div className='basis-1/20'>
                 <button
-                    onClick={() => {
-                       postMutation.mutate(element.productId) 
-                       setIsCartOpen(true) ; 
+                    onClick={() => { 
+                    if(user.username) { 
+                       postMutation.mutate(element.id) 
+                       setIsCartOpen(true) ; }
+                    else { 
+                    alert('Create an account to access cart functionalities.')
+                    }
                     }}
                     className='bg-black text-white rounded-[12px] px-2 py-[1px]  w-[100%]'
                 >
                     Add to cart
                 </button>
+
             </div>
         </div>
     )

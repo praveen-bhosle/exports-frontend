@@ -14,6 +14,7 @@ export const AxiosRequest = async ({url,body, method  }: {url: string , body?: {
       if (e.response) {
         console.log(e.response.status)
         console.log(e.response.data) 
+       // alert("Response status: " + e.response.status + " " +  e.response.data) ; 
       } 
       else {
         console.log('No response for the request ' + e.request)
@@ -27,4 +28,3 @@ export const AxiosRequest = async ({url,body, method  }: {url: string , body?: {
     } 
   }
 }
-

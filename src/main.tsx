@@ -18,9 +18,6 @@ import AuthLayout from './layouts/AuthLayout.tsx'
 
 const queryClient = new QueryClient();
 
-
-
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
@@ -30,7 +27,7 @@ createRoot(document.getElementById('root')!).render(
             <Route index path="" element={<LandingPage />} />
             <Route path="about" element={<About />} />
             <Route path="app" element={<AppLayout />} >
-              <Route path="products" element={<Products />} />
+              <Route index path="products" element={<Products />} />
               <Route path="profile" element={<Profile />} />
             </Route>
           </Route>

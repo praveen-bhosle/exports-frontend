@@ -1,25 +1,28 @@
 import { AxiosRequest } from './AxiosApiHandler'
 
+
+
+
 export const login = async ({username, password}: {username: string ,password: string}) => {  
-    const response =   await AxiosRequest(  { method : 'post' , url: '/public/login' , body: { username , password } } ) ; 
+    const response =   await AxiosRequest(  { method : 'post' , url: '/public/login' , body: { username , password } } ) ;  
 
     if( response == undefined ) {
-        return false ;
+        return { status :  false }  ;
     }
     if(response!=undefined) {  
        console.log(response.data) ;
-        const  { token   } = response.data ;  
+        const  { token ,email } = response.data ;  
         console.log(token) ; 
         localStorage.setItem('YKDAuthToken' , token ) ; 
-        localStorage.setItem('YKDUsername'  , username  ) ; 
-        return true ; 
+        localStorage.setItem('YKDUsername'  , username  ) ;  
+        return { status : true  , data : email  }  ;  
      }
 }
 
-export const logout = async () => { 
-  try {
+export const logout = () => {  
+  try { 
     localStorage.removeItem('YKDAuthToken') ;
-    localStorage.removeItem('YKDUsername') ; 
+    localStorage.removeItem('YKDUsername') ;  
   } catch (e) {
     console.log(e); 
   }

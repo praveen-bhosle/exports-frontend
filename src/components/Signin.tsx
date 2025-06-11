@@ -12,12 +12,21 @@ const Signin = () => {
 
     const handleLogin = async  (e:React.FormEvent<HTMLFormElement>) => {    
         e.preventDefault(); 
+        console.log('handling login') ;
         const formData = new FormData(e.currentTarget);
         const username = formData.get('username')?.toString() ; 
         const password = formData.get('password')?.toString() ; 
+        console.log(username) ; 
+        console.log(password);
         if(username&&password) { 
-        const success = await login({ username , password }) ;  
-        if(success) navigate('/auth/verifyEmail') ; }
+        const  response  = await login({ username , password }) ;  
+        if(response) { 
+        const { status , data  } = response ; 
+        if(status && !data )  navigate('/auth/verifyEmail') ;  }  
+        else { 
+            navigate('/app') 
+         }
+    }
        
     }
 
@@ -29,6 +38,7 @@ const Signin = () => {
                 type='text'
                 className='p-2 outline-none text-xs rounded-md bg-[#E9EAF2] text-black w-full'
                 id='username'
+                name='username'
                 required
             />
             <label className='block  ' htmlFor='password'>Password</label>
@@ -38,10 +48,12 @@ const Signin = () => {
                     id='password'
                     type={passwordHidden ? 'password' : 'text'}
                     required
+                    name='password'
                 />
                 <span className="w-max" onClick={() => setPasswordHidden(!passwordHidden)}>  {passwordHidden ? <img className="inline" src='/eye.svg' alt="" width={20} height={20} /> : <img alt="" className="inline" src='/eyeclose.svg' width={20} height={20} />}  </span>
             </div>
-            <SubmitButton2 text="Login" /> 
+            <SubmitButton2 text="Login" />  
+           
             </form>
             <hr /> 
             <Link to="/auth/signup"  className="underline w-min"> Signup  </Link>

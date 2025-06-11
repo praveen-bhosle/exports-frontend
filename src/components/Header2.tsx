@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useStore } from '../state/Store'
-import { useCart } from '../hooks/useCart';
 import Cart from './Cart';
 import MenuBar from './MenuBar';
 import ProfileBar from './ProfileBar';
@@ -10,7 +9,7 @@ const Header2 = () => {
 
     const { isCartOpen, setIsCartOpen, user, isProfileBarOpen, setIsProfileBarOpen, isMenuBarOpen, setIsMenuBarOpen } = useStore();
 
-    const { totalItems } = useCart();
+    
 
     return (
         <div className='border  w-full fixed  bg-white  top-[0px] left-[0px] z-10'>
@@ -56,7 +55,7 @@ const Header2 = () => {
                             }}>
                             <img src='/cart.svg' alt='cart' width={25} height={25} />
                         </button>
-                        {totalItems !== undefined && totalItems > 0 ? (
+                        {/*totalItems !== undefined && totalItems > 0 ? (
                             <div className='w-[20px] h-[20px] bg-black  text-white  text-[11px] rounded-[10px] relative bottom-[40px] left-[15px] '>
                                 <span className='relative left-[3px] top-[2px] '>{totalItems}</span>
                             </div>
@@ -64,7 +63,7 @@ const Header2 = () => {
                             <div className='w-[20px] h-[20px] bg-black  text-white  text-[11px] rounded-[10px] relative bottom-[30px] left-[15px] opacity-0 '>
                                 <span className='relative left-[3px] top-[2px]  '> 00 </span>
                             </div>
-                        )}
+                        )*/}
                     </div>
                 </div>
             </div>

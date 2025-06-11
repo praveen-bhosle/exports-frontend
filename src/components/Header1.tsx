@@ -17,12 +17,12 @@ const Header = () =>  {
                         <>
                             <a href='/app/profile'> <img src='/profile.svg' alt='' width={40} height={40} />  </a>
                             <button onClick={async () => {
-                                await logout() ; 
+                                 logout() ; 
                             }} > Log out </button> </>
                         :
                         <>
                             <a href='/auth/signup'> Sign up  </a>
-                            <a href='/auth/signin'> Log in   </a>
+                            <a href='/auth/login'> Log in   </a>
                         </>
                 }
             </div>

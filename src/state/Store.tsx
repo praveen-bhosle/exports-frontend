@@ -15,8 +15,8 @@ interface Store {
     setProfile: (profile: Profile) => void,
 }
 
-export const useStore = create<Store>((set) => ({
-    user: { loggedIn: false, profileCreated: false },
+ export const  useStore = create<Store>((set) => ({
+    user: { username : null ,   profileCreated: false },
     setUser: (user: User) => { set(() => ({ user })) },
     isCartOpen: false,
     setIsCartOpen: (isCartOpen: boolean) => { set(() => ({ isCartOpen })) },

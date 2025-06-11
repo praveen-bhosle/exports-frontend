@@ -20,7 +20,7 @@ const CartItemCard = ({ cartItem, id }: {
 
                 <div className=' p-2 w-[300px] '>
                     <div className='text-gray-800 font-bold text-sm '>
-                        ${product.price} || ₹{product.price * 80}
+                        ${product.price} 
                     </div>
 
                     <div className='text-black font-bold text-sm  '>
@@ -28,7 +28,7 @@ const CartItemCard = ({ cartItem, id }: {
                     </div>
 
                     <div className='text-black  font-semibold text-xs     '>
-                        Size: {product.sizeStringB} || {product.sizeStringA}
+                        Size: {product.sizeB} || {product.sizeA}
                     </div>
 
                     <div className='flex  justify-between '>

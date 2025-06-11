@@ -11,7 +11,7 @@ const MenuBar = () => {
             </Link>
             <Link
                 className='block w-[90vw] px-2 py-1 hover:bg-custom-hover text-custom-subheading my-2  rounded-md'
-                to={'/auth/signin'}
+                to={'/auth/login'}
             >
                 Sign In
             </Link>

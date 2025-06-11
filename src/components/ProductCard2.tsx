@@ -25,27 +25,7 @@ const ProductCard2 = ({ element }: { element: Product }) => {
 
     return (
         <div className='rounded-[8px] p-[4px] shadow-custom hover:shadow-hoverCustom  transition:shadow '>
-            <Carousel
-                swipeable={false}
-                draggable={false}
-                showDots={false}
-                responsive={responsive}
-                ssr={true}
-                infinite={true}
-                autoPlay={false}
-                keyBoardControl={true}
-                customTransition="all .5"
-                transitionDuration={500}
-                containerClass="carousel-container"
-                dotListClass="custom-dot-list-style"
-                itemClass="carousel-item-padding-40-px"
-                className='carousel-container z-0'
-            >
-                {element.image?.map((e, index) =>
-                    <div key={index}>   <img src={e} width={0} height={0} sizes="100vw" className='w-full h-auto rounded-[5px]' /></div>
-                )
-                }
-            </Carousel>
+           
         </div>
     )
 }

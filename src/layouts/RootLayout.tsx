@@ -3,12 +3,13 @@ import Footer from "../components/Footer"
 import Header from "../components/Header1"
 import { useStore } from "../state/Store"
 import { CheckLogged } from "../utils/CheckLogged"
+import { useEffect } from "react"
 
 
 const RootLayout = () => { 
-    const { setUser } = useStore() ;  
+    const { setUser  ,  user } = useStore() ;  
     const  { username } = CheckLogged() ;  
-    setUser( { username  })  ; 
+    useEffect(() => { if(  user.username !== username ) setUser({username})} ,[user])  ; 
     return (
         <div className="bg-[#FAFAFA]">
             <Header />

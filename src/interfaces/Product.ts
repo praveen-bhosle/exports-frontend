@@ -1,8 +1,12 @@
+interface Image { 
+  name : string 
+}
+
 export interface Product {
   id: number
   quality: string
-  price?: number | null
+  cost: number 
   sizeA: string
   sizeB: string
-  image?: string[] | null
+  images: Image[] 
 }

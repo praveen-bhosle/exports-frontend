@@ -10,7 +10,8 @@ export const getCartItems = async () => {
   } 
   else {  
     console.log(response.data) ; 
-    const cartItems: CartItem[] = response.data.cartItems ;  
+    const cartItems: CartItem[] = response.data.cartItems ;   
+    cartItems.sort( (a , b) => a.id - b.id  ) ;
     return   { success : true ,  cartItems }  ;
   }  
  }

@@ -7,9 +7,9 @@ export const CartData  = ( cartItems : CartItem[] ) =>  {
       if (item === undefined || item === null)  continue; 
       const product = item.product;
       if (product === undefined || product === null)  continue; 
-      const price = product.price;
+      const price = product.cost;
       if (price === undefined || price === null)  continue; 
-      totalCost += price; }
+      totalCost += price * cartItems[i].quantity  ; }
     const totalItems = cartItems?.length 
    return { totalCost, totalItems }  
 }

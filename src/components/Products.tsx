@@ -49,7 +49,8 @@ const Products = () => {
                 <div> Error fetching products </div>
             </>
         )
-    }
+    } 
+
     return ( 
         <>
             <div className=' py-2 px-2' >

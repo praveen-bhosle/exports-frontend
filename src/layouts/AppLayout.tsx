@@ -5,7 +5,7 @@ const AppLayout = () => {
     return (
         <div className="bg-[#FAFAFA]">
             <Header2 />
-            <div className=""> 
+            <div className="p-2"> 
             <Outlet />
             </div>
         </div>

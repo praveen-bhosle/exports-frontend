@@ -21,9 +21,8 @@ const Cart = () => {
         const { cartItems } = query.data ;
         if(cartItems!==undefined) { 
              const { totalItems , totalCost } = CartData(cartItems) ;  
-             
              return (
-             <div>
+             <div className="">
                 <div className='px-4 py-2  rounded-md z-50'>
                     <div className='mb-2  align-center flex'>
                         <span className='text-black font-bold mr-2'>
@@ -37,15 +36,14 @@ const Cart = () => {
                         </button>
                     </div>
     
-                    <div className='grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4'>
-                        {cartItems?.map( (item,index) => <CartItemCard key={ index} cartItem={item} id={item.id} />)}
+                    <div className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
+                        {cartItems?.map( (item,index) => <CartItemCard key={ index} cartItem={item} />)}
                     </div>
     
                     <div className='mt-2 flex bg-black justify-between p-2 align-center'>
                         <div className=' font-extrabold text-white border-white   align-center  '>
                             <span className='block  relative top-[6px] '>
-                                Total Price: ${totalCost} || ₹{ // @ts-ignore 
-                                    totalCost * 80}
+                                Total Price: Rs.{totalCost}.00 
                             </span>
                         </div>
     

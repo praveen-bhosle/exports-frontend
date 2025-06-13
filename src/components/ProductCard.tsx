@@ -7,6 +7,7 @@ import { useCartQueryMutations } from '../hooks/useCartQueryMutations';
 import Loading from './Loading';
 import { useNavigate } from 'react-router-dom';
 
+
 const ProductCard = ({ element    }: { element: Product   }) => {
 
     const responsive = {
@@ -33,8 +34,7 @@ const ProductCard = ({ element    }: { element: Product   }) => {
 
     const {  postMutation }  = useCartQueryMutations( ) ;  
 
-    const navigate  = useNavigate() ;   
-
+    const navigate  = useNavigate() ;    
  
     
     return (
@@ -42,7 +42,7 @@ const ProductCard = ({ element    }: { element: Product   }) => {
         <div className='flex flex-col gap-2  rounded-[8px] p-[4px] shadow-custom hover:shadow-hoverCustom  transition:shadow  border-black border-[2px] sm:border-[3px] md:border-[4px] '>
 
             <div className='basis-3/4'>
-
+              
                 <Suspense fallback={<Loading />}>
                     <Carousel
                         swipeable={false}
@@ -60,21 +60,22 @@ const ProductCard = ({ element    }: { element: Product   }) => {
                         itemClass="carousel-item-padding-40-px"
                         className='carousel-container z-0'
                     >
-                        {element.image?.map((e, index) =>  {
+                        {element.images.map((e, index) =>  {
                             return ( 
-                            <div key={index}>   <img src= {'/'+e} alt='' width={0} height={0} sizes="100vw" className='w-full h-auto rounded-[5px]' /></div>  ) 
+                            <div key={index}>   <img src= {'/'+e.name} alt='' width={0} height={0} sizes="100vw" className='w-full h-auto rounded-[5px]' /></div>  ) 
                             } 
                         )
                         }
                     </Carousel>
                 </Suspense>
+            
             </div>
 
             <div className='basis-1/5 '>
                 <a className='text-xl   font-bold text-black  hover:underline hover:cursor-pointer ' onClick={() => { navigate(`/app/products?productId=${element.id}`) }} > {element.sizeA} </a> <br />
                 <span className='text-sm  '> {element.sizeB} </span> <br />
                 <span className='text-sm  font-semibold select-none'>
-                    {element.price}
+                    Rs.{element.cost}/kg
                 </span>
             </div>
 

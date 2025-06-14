@@ -25,7 +25,7 @@ const CartItemCard = ({ cartItem }: {
             <button  className='bg-black text-white rounded-[12px] px-2 py-[1px] w-[80px]' onClick={ () => { putMutation.mutate(  { cartItemId : id , quantity :  parseInt(value)}) ; setEditMode(false)  }  }> Update </button>
             </> : <>
             <span className='text-black text-md font-bold select-none '>{quantity} kg</span> 
-            <button  className='bg-black text-white rounded-[12px] px-2 py-[1px] w-[80px] ' onClick= { () => { setEditMode(true) } }>Edit</button>
+            <button  className='bg-black text-white rounded-[12px] px-2 py-[1px] w-[80px] ' onClick= { () => { setValue(quantity.toString()) ; setEditMode(true) } }>Edit</button>
             </> 
         )
     }

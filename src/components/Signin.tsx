@@ -2,17 +2,23 @@ import {  useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../api/AuthApi";
 import SubmitButton2 from "../UIComponents/SubmitButton2";
+import toast  from "react-hot-toast";
+//import { useStore } from "../state/Store";
+//import toast, { type Renderable, type ValueOrFunction } from "react-hot-toast";
+
+
 
 const Signin = () => {
 
    
-    const [passwordHidden, setPasswordHidden] = useState(true);  
- 
-    const navigate = useNavigate() ; 
+    const [passwordHidden, setPasswordHidden] = useState(true);   
+
+    
+   
+    const navigate = useNavigate() ;    
 
     const handleLogin = async  (e:React.FormEvent<HTMLFormElement>) => {    
         e.preventDefault(); 
-        console.log('handling login') ;
         const formData = new FormData(e.currentTarget);
         const username = formData.get('username')?.toString() ; 
         const password = formData.get('password')?.toString() ; 
@@ -20,20 +26,25 @@ const Signin = () => {
         console.log(password);
         if(username&&password) { 
         const  response  = await login({ username , password }) ;  
-        if(response) { 
-        const { status , data  } = response ; 
-        if(status && !data )  navigate('/auth/verifyEmail') ;  }  
+        
+        if(response.success) { 
+          const { email  } = response.data ; 
+          if( !email)  navigate('/auth/verifyEmail') ;   
+          else navigate('/app') ;  
+          toast.success("Logged in successfully.") ; 
+        }
         else { 
-            navigate('/app') 
-         }
+          toast.error(response.data) ; 
+        } 
     }
-       
-    }
+    } 
+    
+    
 
     return ( 
           <div className='flex flex-col gap-2 text-xl font-bold'>
-            <form onSubmit={ (e) => handleLogin(e)  }>
-            <label className='block  mb-[2px]' htmlFor='username'>Username</label>
+            <form onSubmit={ (e) =>  { const myPromise =  handleLogin(e) ;  toast.promise( myPromise ,  { loading : "Logging in..." } ) }}>
+            <label className='block  mb-[2px]' htmlFor='username'>Username</label> 
             <input
                 type='text'
                 className='p-2 outline-none text-xs rounded-md bg-[#E9EAF2] text-black w-full'

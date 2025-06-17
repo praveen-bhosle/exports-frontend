@@ -4,7 +4,10 @@ import { logout } from '../api/AuthApi';
 
 
 const Header = () =>  { 
-    const  {user} = useStore() ;
+    const  {user} = useStore() ; 
+     
+    
+     
     return (
         <div className=' bg-[#FAFAFA] flex justify-between w-full fixed top-0 left-0 '>
             <a href='/' >

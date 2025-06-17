@@ -7,24 +7,20 @@ export const AxiosRequest = async ({url,body, method  }: {url: string , body?: {
      const token  = localStorage.getItem('YKDAuthToken') ;   
      const headers = { "Authorization"  : "Bearer " + token  }
      const response = await axios({ method,url  , baseURL , data: body ,  headers })  ; 
-     return  {  status :  response.status  , data :  response.data ,  headers : response.headers } 
+     return  {  status :  response.status  , data :  response.data ,  headers : response.headers }  
    } 
  catch (e) {
     if (isAxiosError(e)) {
       if (e.response) {
-        console.log(e.response.status)
-        console.log(e.response.data) 
-       // alert("Response status: " + e.response.status + " " +  e.response.data) ; 
+        const response = e.response ; 
+        return  {  status :  response.status , data :  response.data ,  headers : response.headers }  ; 
       } 
       else {
-        console.log('No response for the request ' + e.request)
+        return  {   data : "Server did not respond." }  ; 
       }
     } 
-    else {
-      if (e instanceof Error) {
-        console.log(e.message) 
-      }
-      console.log('Unknown error ' + e) 
+    else { 
+      return { data : "Internal server error." } ; 
     } 
   }
 }

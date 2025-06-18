@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom"; 
 
 import { logout } from "../api/AuthApi"; 
 
@@ -8,7 +8,14 @@ import { logout } from "../api/AuthApi";
 
 const ProfileBar = () => {
 
-    const {  user, profile  } = useStore();
+    const user = useStore( ( state ) => state.user );  
+    const profile = useStore((state) => state.profile  )
+    const setIsProfileBarOpen  = useStore( (state) => state.setIsProfileBarOpen) ; 
+
+   
+
+    const naviagate = useNavigate() ; 
+
     return (
         <div className='px-4 py-2 rounded-md'>
             <div className=' w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md cursor-pointer'>
@@ -20,6 +27,7 @@ const ProfileBar = () => {
             </div>
 
             <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer'> My orders   </div>
+            <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer' onClick={ () =>  { naviagate('/app/addresses')  ; setIsProfileBarOpen(false) ;  }  } > My addresses   </div>
             <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer'  > Settings </div>
             <div className=' w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md cursor-pointer'
                 onClick={  () => {  

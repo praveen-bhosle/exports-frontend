@@ -1,5 +1,6 @@
 export const Header3 = ({ quality, setQuality }: { quality: string | null, setQuality: React.Dispatch<React.SetStateAction<string | null>> }) => {
-    return (<div className='text-lg flex justify-center gap-2 bg-white  w-full px-2 '>
+
+    return (<div className='text-lg flex justify-center gap-2 bg-white  w-[100%] px-2'>
         <button className='rounded-2xl px-2 py-[2px] text-xs border-2 ' style={{
             background: quality === 'handpicked' ? 'white' : 'black', color: quality === 'handpicked' ? 'black' : 'white'
         }} onClick={() => { setQuality('handpicked') }}    >
@@ -20,4 +21,5 @@ export const Header3 = ({ quality, setQuality }: { quality: string | null, setQu
             <div className='text-4xl text-center font-bold'> MH </div>
             <div className=''> Machine-Picked </div> </button>
     </div>)
+
 }

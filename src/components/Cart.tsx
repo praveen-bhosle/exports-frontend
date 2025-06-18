@@ -9,7 +9,7 @@ const Cart = () => {
 
     const {query} = useCartQueryMutations() ;
 
-    const { setIsCartOpen } = useStore(); 
+    const setIsCartOpen  = useStore( (state) => state.setIsCartOpen ); 
 
     if(query.status ==='pending') { 
         return ( <div>Loading cart products.</div>)

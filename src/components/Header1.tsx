@@ -4,7 +4,7 @@ import { logout } from '../api/AuthApi';
 
 
 const Header = () =>  { 
-    const  {user} = useStore() ; 
+    const  user = useStore( (state) => state.user ) ; 
      
     
      

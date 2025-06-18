@@ -4,6 +4,7 @@ import Header from "../components/Header1"
 import { useStore } from "../state/Store"
 import { CheckLogged } from "../utils/CheckLogged"
 import { useEffect } from "react"
+import { Toaster } from "react-hot-toast"
 
 
 const RootLayout = () => { 
@@ -13,10 +14,13 @@ const RootLayout = () => {
     return (
         <div className="bg-[#FAFAFA]">
             <Header />
-            <div className="mt-[49px] pt-[2px]"> 
+            <div className="mt-[49px] pt-[2px]">  
+            <div className="min-h-[76vh]"> 
+            <Toaster /> 
             <Outlet />
-            <Footer />
             </div>
+            <Footer />
+            </div> 
         </div>
     )
 }

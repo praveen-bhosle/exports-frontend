@@ -7,9 +7,9 @@ import {
 } from '../api/CartProductsApi'
 
 export const useCartQueryMutations = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient() ; 
 
-  const query = useQuery({ queryKey: ['cartItems'], queryFn: getCartItems })
+  const query = useQuery({ queryKey: ['cartItems'], queryFn: getCartItems }) ; 
 
   const postMutation = useMutation({
     mutationFn: createCartItem,
@@ -19,7 +19,7 @@ export const useCartQueryMutations = () => {
   })
 
   const deleteMutation = useMutation({
-    mutationFn: deleteCartItem,
+    mutationFn:  deleteCartItem,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cartItems'] })
     }

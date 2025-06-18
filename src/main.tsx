@@ -15,7 +15,7 @@ import Products from './components/Products.tsx'
 import VerifyEmail from './components/VerifyEmail.tsx'
 import AuthLayout from './layouts/AuthLayout.tsx'
 import Checkout from './components/Checkout.tsx'
-
+import Addresses from './components/Addresses.tsx'
 
 const queryClient = new QueryClient();
 
@@ -29,14 +29,16 @@ createRoot(document.getElementById('root')!).render(
             <Route path="about" element={<About />} />
             <Route path="app" element={<AppLayout />} >
               <Route index path="products" element={<Products />} />
-              <Route path="profile" element={<Profile />} />
+              <Route path="profile" element={<Profile />     } />
               <Route path="checkout" element= { <Checkout/>  } /> 
+              <Route path="addresses" element={ <Addresses/> } /> 
             </Route>
           </Route>
           <Route path="/auth"  element = { <AuthLayout/>} >
             <Route path="login" element={<Signin />} />
             <Route path="signup" element={<Signup />} />
             <Route path='verifyEmail' element =  { <VerifyEmail/> } />
+
           </Route>
         </Routes>
       </BrowserRouter>

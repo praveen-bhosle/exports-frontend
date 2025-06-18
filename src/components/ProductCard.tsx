@@ -29,14 +29,12 @@ const ProductCard = ({ element    }: { element: Product   }) => {
         }
     };
  
-    
-    const  { setIsCartOpen , user  }   = useStore() ; 
+    const setIsCartOpen  = useStore( (state) => state.setIsCartOpen  ) ; 
+    const user = useStore( (state) => state.user) ; 
 
     const {  postMutation }  = useCartQueryMutations( ) ;  
-
     const navigate  = useNavigate() ;    
  
-    
     return (
 
         <div className='flex flex-col gap-2  rounded-[8px] p-[4px] shadow-custom hover:shadow-hoverCustom  transition:shadow  border-black border-[2px] sm:border-[3px] md:border-[4px] '>

@@ -5,12 +5,16 @@ import MenuBar from './MenuBar';
 import ProfileBar from './ProfileBar';
 
 
+
 const Header2 = () => {
 
-    const { isCartOpen, setIsCartOpen, user, isProfileBarOpen, setIsProfileBarOpen, isMenuBarOpen, setIsMenuBarOpen } = useStore();
-
-    
-
+    const  isCartOpen           = useStore(state => state.isCartOpen) ;
+    const  setIsCartOpen        = useStore(state => state.setIsCartOpen) ; 
+    const  user                 = useStore(state => state.user) ;
+    const  isProfileBarOpen     = useStore(state => state.isProfileBarOpen) ;
+    const  setIsProfileBarOpen  = useStore(state => state.setIsProfileBarOpen) ;
+    const  isMenuBarOpen        = useStore(state => state.isMenuBarOpen) ;
+    const  setIsMenuBarOpen     = useStore(state => state.setIsMenuBarOpen) ; 
     return (
         <div className='border  w-full fixed  bg-white  top-[0px] left-[0px] z-10'>
             <div className='flex justify-between  mb-2  align-center mx-4 mt-[9px] h-[30px] '>

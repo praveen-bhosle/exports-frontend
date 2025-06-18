@@ -1,1 +1,24 @@
 @import "tailwindcss"; 
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.form > label  { 
+    width:  100% ;
+    font-weight: 800;
+}  
+  
+.form > input   { 
+    width:  100% ;
+    outline: none;
+    border-width: 1px ;
+    border-radius:  8px ;
+    padding: 2px 2px 2px 10px ;
+}  
+
+
+.button { 
+ @apply mx-[10%] w-[80%] cursor-pointer bg-black font-bold rounded-xl text-white  my-2
+}

@@ -6,9 +6,7 @@ import SubmitButton2 from "../UIComponents/SubmitButton2";
 
 const Signup = () => {
 
-   
     const [passwordHidden, setPasswordHidden] = useState(true);
-
     const navigate = useNavigate() ;  
 
     const handleSignUp = async  (e :React.FormEvent<HTMLFormElement>) => {    

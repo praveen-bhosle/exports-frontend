@@ -10,11 +10,7 @@ import toast  from "react-hot-toast";
 
 const Signin = () => {
 
-   
-    const [passwordHidden, setPasswordHidden] = useState(true);   
-
-    
-   
+    const [passwordHidden, setPasswordHidden] = useState(true);      
     const navigate = useNavigate() ;    
 
     const handleLogin = async  (e:React.FormEvent<HTMLFormElement>) => {    

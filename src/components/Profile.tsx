@@ -3,7 +3,8 @@ import Input from "../UIComponents/Input";
 
 const Profile = () => {
 
-    const { user, profile } = useStore();
+    const  user  = useStore( state => state.user ); 
+    const profile = useStore( state => state.profile  )  ; 
 
     if (user.profileCreated) {
         return (

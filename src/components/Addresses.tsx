@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 import { useAddressQueryMutations } from "../hooks/useAdressQueryMutations"
 import AddressCard from "./AddressCard";
 
@@ -9,13 +8,8 @@ import { useState } from "react";
 const Addresses = () => { 
   const { query ,  postMutation  , editMutation , deleteMutation  } = useAddressQueryMutations( ) ;   
   const [ addState ,  setAddstate] = useState(false) ;  
- 
-  let toastId ; 
-  if(query.status === 'pending') { 
-  toastId =  toast.loading("Loading products from server.")  ; 
-  }
+
   if(query.status === 'success'  && query.data.addresses  ) { 
-  toast.dismiss(toastId) ;
   return ( 
     <>
     <div> 

@@ -9,7 +9,7 @@ export const getAddresses  =  async () => {
    const response = await AxiosRequest( { url ,  method : 'get' } ) ;  
    if(response.status === 200  ) {   
       const addresses : Address[] = response.data ; 
-      toast.success("Addresses loaded successfully.") ;  return { success: true , data : response.data , addresses } ;
+      return { success: true , data : response.data , addresses } ;
    } ; 
    toast.error(response.data) ; 
    return { success :false ,  data :response.data }  ;

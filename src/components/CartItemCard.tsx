@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useCartQueryMutations } from '../hooks/useCartQueryMutations';
+import {   useCartMutations } from '../hooks/useCartQueryMutations';
 import type { CartItem } from '../interfaces/CartItem';
 import ProductCard2 from './ProductCard2'
 
@@ -8,7 +8,7 @@ const CartItemCard = ({ cartItem }: {
     cartItem: CartItem
 }) => {
 
-    const { putMutation, deleteMutation } = useCartQueryMutations();
+    const { putMutation, deleteMutation } = useCartMutations();
 
     const product = cartItem.product;
     const quantity = cartItem.quantity;

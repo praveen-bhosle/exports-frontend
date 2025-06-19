@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 import CartItemCard from "./CartItemCard";
 import { useStore } from "../state/Store";
-import { useCartQueryMutations } from "../hooks/useCartQueryMutations";
+import { useCartQuery } from "../hooks/useCartQueryMutations";
 import { CartData } from "../utils/CartData";
 
 const Cart = () => { 
 
-    const {query} = useCartQueryMutations() ;
+    const {query} = useCartQuery() ;
 
     const setIsCartOpen  = useStore( (state) => state.setIsCartOpen ); 
 

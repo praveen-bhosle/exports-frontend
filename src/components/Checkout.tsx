@@ -1,12 +1,12 @@
 
 import { useState } from "react";
-import { useCartQueryMutations } from "../hooks/useCartQueryMutations"
+import { useCartQuery } from "../hooks/useCartQueryMutations"
 import { CartData } from "../utils/CartData";
 import CartItemCard from "./CartItemCard";
 
 const Checkout  = () => {
  
-  const {query}  = useCartQueryMutations() ;   
+  const {query}  = useCartQuery() ;   
 
   const [ gateway ,setGateway ] = useState('') ;
 

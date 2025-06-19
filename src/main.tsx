@@ -28,7 +28,7 @@ createRoot(document.getElementById('root')!).render(
             <Route index path="" element={<LandingPage />} />
             <Route path="about" element={<About />} />
             <Route path="app" element={<AppLayout />} >
-              <Route index path="products" element={<Products />} />
+              <Route  path="products" element={<Products />} />
               <Route path="profile" element={<Profile />     } />
               <Route path="checkout" element= { <Checkout/>  } /> 
               <Route path="addresses" element={ <Addresses/> } /> 

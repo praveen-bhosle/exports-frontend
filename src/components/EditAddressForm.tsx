@@ -1,10 +1,11 @@
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { Address } from "../interfaces/Address";
 import SubmitButton2 from "../UIComponents/SubmitButton2";
+import toast from "react-hot-toast";
 
 const EditAddressForm = ({address , stateFn  ,  editMutation } : {address : Address  ,  stateFn  : React.Dispatch<React.SetStateAction<boolean>> ,  editMutation  : UseMutationResult<{ success: boolean; data: any }, Error, Address, unknown>  }) => {
 
-  const handleSubmit = ( e: React.FormEvent<HTMLFormElement>) => { 
+  const handleSubmit = async ( e: React.FormEvent<HTMLFormElement>) =>  { 
     e.preventDefault() ;
     const formData      = new FormData(e.currentTarget) ; 
     const fullName      = formData.get('fullname')?.toString()       || '' ; 
@@ -18,7 +19,7 @@ const EditAddressForm = ({address , stateFn  ,  editMutation } : {address : Addr
     const country       = formData.get('country')?.toString()        || '' ; 
     const isDefault     = formData.get('isDefault')?.toString() ? true : false  ;   
     const newAddress : Address = { id : address.id ,  fullName , mobileNumber , pincode  , addr1 , addr2 , landmark , city , state , country , isDefault  } ; 
-    editMutation.mutate(newAddress) ; 
+    await editMutation.mutateAsync(newAddress) ; 
     stateFn(false) ; 
   }
 
@@ -28,7 +29,7 @@ const EditAddressForm = ({address , stateFn  ,  editMutation } : {address : Addr
     <h1 className="font-bold text-xl"> Edit  address </h1> <br/> 
     <button className="w-full  p-2 font-bold cursor-pointer border-2" >Autofill your current location.</button> 
 
-    <form  className="form"  onSubmit={  handleSubmit } > 
+    <form  className="form"  onSubmit={ (e) => {   const myPromise =  handleSubmit(e) ;   toast.promise(myPromise ,  { loading : "Editing the address." })  }  } > 
         <label htmlFor="fullname"  > Fullname * </label> 
         <input type="text" name="fullname"  id="fullname" defaultValue={address.fullName} required />
         <label htmlFor="mobil_number"> Mobile number *   </label>

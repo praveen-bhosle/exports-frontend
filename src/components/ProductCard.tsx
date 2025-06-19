@@ -3,10 +3,9 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import type { Product } from '../interfaces/Product';
 import { useStore } from '../state/Store';
-import { useCartQueryMutations } from '../hooks/useCartQueryMutations';
+import { useCartMutations } from '../hooks/useCartQueryMutations';
 import Loading from './Loading';
 import { useNavigate } from 'react-router-dom';
-
 
 const ProductCard = ({ element    }: { element: Product   }) => {
 
@@ -32,8 +31,9 @@ const ProductCard = ({ element    }: { element: Product   }) => {
     const setIsCartOpen  = useStore( (state) => state.setIsCartOpen  ) ; 
     const user = useStore( (state) => state.user) ; 
 
-    const {  postMutation }  = useCartQueryMutations( ) ;  
-    const navigate  = useNavigate() ;    
+   const {  postMutation }  = useCartMutations( ) ;  
+    const navigate  = useNavigate() ; 
+   
  
     return (
 
@@ -81,7 +81,7 @@ const ProductCard = ({ element    }: { element: Product   }) => {
                 <button
                     onClick={() => { 
                     if(user.username) { 
-                       postMutation.mutate(element.id) 
+                     postMutation.mutate(element.id) ; 
                        setIsCartOpen(true) ; }
                     else { 
                     alert('Create an account to access cart functionalities.')

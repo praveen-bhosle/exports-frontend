@@ -15,7 +15,11 @@ const AddressCard = (
   const [editState ,setEditState] = useState(false) ;  
 
   const handleRemove = async  () => { 
-       if(address.id) deleteMutation.mutate( address.id ) ;  
+       if(address.id) await  deleteMutation.mutateAsync( address.id ) ;  
+  }
+
+  const handleSetAsDefault = async () => { 
+       if(address.id) await editMutation.mutateAsync( { ...address ,isDefault : true  }) ; 
   }
 
   return (
@@ -31,7 +35,7 @@ const AddressCard = (
         <div className="flex gap-2 underline "> 
            <span className="cursor-pointer" onClick={ () => {  setEditState(true) ;  }} > Edit </span> 
            <span className="cursor-pointer" onClick={ () => {  const myPromise =  handleRemove() ; toast.promise( myPromise ,  { loading :"Deleting address." })  }}> Remove </span>
-           { !address.isDefault   &&   (<span onClick={() => {  }}> Set as default   </span>) }  
+           { !address.isDefault   &&   (<span className="cursor-pointer" onClick={() => { const myPromise = handleSetAsDefault() ; toast.promise( myPromise , { loading : "Setting address as default." }) }}> Set as default   </span>) }  
         </div>
 
         

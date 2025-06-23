@@ -29,7 +29,7 @@ const EditAddressForm = ({address , stateFn  ,  editMutation } : {address : Addr
     <h1 className="font-bold text-xl"> Edit  address </h1> <br/> 
     <button className="w-full  p-2 font-bold cursor-pointer border-2" >Autofill your current location.</button> 
 
-    <form  className="form"  onSubmit={ (e) => {   const myPromise =  handleSubmit(e) ;   toast.promise(myPromise ,  { loading : "Editing the address." })  }  } > 
+    <form  className="form"  onSubmit={ (e) => {   const myPromise =  handleSubmit(e) ;   toast.promise(myPromise ,  { loading : "Editing the address."  ,  success : "Address edited successfully." })  }  } > 
         <label htmlFor="fullname"  > Fullname * </label> 
         <input type="text" name="fullname"  id="fullname" defaultValue={address.fullName} required />
         <label htmlFor="mobil_number"> Mobile number *   </label>

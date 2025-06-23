@@ -1,7 +1,7 @@
 const Modal = ( {    children   } : { children : React.ReactNode   }) => {  
   return (
-  <div className="fixed inset-0 bg-gray-300  flex items-center justify-center z-50">
-    <div className="bg-white p-6 rounded-xl shadow-lg relative  mx-[20px]"> 
+  <div className="fixed inset-0 bg-gray-300  dark:bg-gray-900 flex items-center justify-center z-50">
+    <div className="bg-white dark:bg-black p-6 rounded-xl shadow-lg relative  mx-[20px]"> 
        { children}
     </div>
   </div> 

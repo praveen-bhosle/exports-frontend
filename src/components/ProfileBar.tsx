@@ -1,40 +1,47 @@
 
-import { Link, useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom"; 
 
 import { logout } from "../api/AuthApi"; 
 
  import { useStore } from "../state/Store";  
+import Modal from "./Modal";
+import ProfileForm from "./ProfileForm";
+import { useState } from "react";
 
 
-const ProfileBar = () => {
+const ProfileBar = ( ) => { 
 
-    const user = useStore( ( state ) => state.user );  
-    const profile = useStore((state) => state.profile  )
     const setIsProfileBarOpen  = useStore( (state) => state.setIsProfileBarOpen) ; 
+    const user = useStore( state => state.user ) ; 
+    
+    const [profileFormOpen,setProfileFormOpen]  = useState(false) ;   
 
+    
    
 
     const naviagate = useNavigate() ; 
 
     return (
+        <> 
         <div className='px-4 py-2 rounded-md'>
+            
             <div className=' w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md cursor-pointer'>
-                {user.profileCreated ? <div>
-                    Hi  {profile.firstName?.toUpperCase()}
+                { user.profile ? <div>
+                    Hi  {user.profile.firstName}
                 </div>
                     :
-                    <Link to='/app/profile'>Create Profile</Link>}
+                    <div onClick = { () => {  setProfileFormOpen(true)  } }>Create Profile</div>}
             </div>
 
-            <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer'> My orders   </div>
+            <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer'> My orders   </div> 
+            <div className="w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer"  onClick={ () => { naviagate('/app/account') }} > My account </div>
             <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer' onClick={ () =>  { naviagate('/app/addresses')  ; setIsProfileBarOpen(false) ;  }  } > My addresses   </div>
             <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer'  > Settings </div>
-            <div className=' w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md cursor-pointer'
-                onClick={  () => {  
-                    logout() ;  
-                     }}
-            > Log out  </div>
+            <div className=' w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md cursor-pointer' onClick={  () => {  logout();}}> Log out  </div>
         </div>
+        {  profileFormOpen && <Modal> <ProfileForm forEdit={false} setProfileFormOpen={ setProfileFormOpen}  />  </Modal>    }
+        
+        </>
     )
 }
 

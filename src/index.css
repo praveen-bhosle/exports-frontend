@@ -20,5 +20,24 @@
 
 
 .button { 
- @apply mx-[10%] w-[80%] cursor-pointer bg-black font-bold rounded-xl text-white  my-2
+ @apply mx-[10%] w-[80%] cursor-pointer bg-black font-bold rounded-xl text-white  my-2 dark:text-black dark:bg-gray-300
 }
+
+.custom-svg   { 
+@apply stroke-black dark:stroke-white
+}
+
+.custom-svg-2 {
+@apply fill-black dark:fill-white
+}
+
+
+.custom-svg-2 > path  {
+    @apply fill-black dark:fill-white
+}
+
+
+.custom-svg > path   { 
+    @apply stroke-black dark:stroke-white
+}
+    

@@ -10,12 +10,12 @@ import Signup from './components/Signup.tsx'
 import AppLayout from './layouts/AppLayout.tsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import About from './components/About.tsx'
-import Profile from './components/Profile.tsx'
 import Products from './components/Products.tsx'
 import VerifyEmail from './components/VerifyEmail.tsx'
 import AuthLayout from './layouts/AuthLayout.tsx'
 import Checkout from './components/Checkout.tsx'
 import Addresses from './components/Addresses.tsx'
+import Account from './components/Account.tsx'
 
 const queryClient = new QueryClient();
 
@@ -28,8 +28,8 @@ createRoot(document.getElementById('root')!).render(
             <Route index path="" element={<LandingPage />} />
             <Route path="about" element={<About />} />
             <Route path="app" element={<AppLayout />} >
-              <Route  path="products" element={<Products />} />
-              <Route path="profile" element={<Profile />     } />
+              <Route index path="" element={<Products />} />
+              <Route path="account" element={ <Account />     } />
               <Route path="checkout" element= { <Checkout/>  } /> 
               <Route path="addresses" element={ <Addresses/> } /> 
             </Route>

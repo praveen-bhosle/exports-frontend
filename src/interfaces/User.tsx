@@ -1,4 +1,8 @@
+import type { Profile } from "./Profile";
+
 export interface User {
-    username?: string | null,
-    profileCreated?: boolean
+    username?: string , 
+    email? : string  , 
+    phone? : string ,
+    profile? :Profile
 }

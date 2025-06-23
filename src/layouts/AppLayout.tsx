@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 import Header2 from "../components/Header2";
 
-const AppLayout = () => {
+const AppLayout = () => { 
     return (
-        <div className="bg-[#FAFAFA]">
+        <div>
             <Header2 />
             <div className="p-2"> 
             <Outlet />

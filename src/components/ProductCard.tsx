@@ -6,6 +6,7 @@ import { useStore } from '../state/Store';
 import { useCartMutations } from '../hooks/useCartQueryMutations';
 import Loading from './Loading';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const ProductCard = ({ element    }: { element: Product   }) => {
 
@@ -33,11 +34,15 @@ const ProductCard = ({ element    }: { element: Product   }) => {
 
    const {  postMutation }  = useCartMutations( ) ;  
     const navigate  = useNavigate() ; 
+
+    const handleAdd = async () => { 
+        await postMutation.mutateAsync(element.id) ; 
+        setIsCartOpen(true) ; }
    
  
     return (
 
-        <div className='flex flex-col gap-2  rounded-[8px] p-[4px] shadow-custom hover:shadow-hoverCustom  transition:shadow  border-black border-[2px] sm:border-[3px] md:border-[4px] '>
+        <div className='flex flex-col gap-2  rounded-[8px] p-[4px] shadow-custom hover:shadow-hoverCustom  transition:shadow  border-black dark:border-white border-[1px] sm:border-[2px] md:border-[2px] '>
 
             <div className='basis-3/4'>
               
@@ -70,7 +75,7 @@ const ProductCard = ({ element    }: { element: Product   }) => {
             </div>
 
             <div className='basis-1/5 '>
-                <a className='text-xl   font-bold text-black  hover:underline hover:cursor-pointer ' onClick={() => { navigate(`/app/products?productId=${element.id}`) }} > {element.sizeA} </a> <br />
+                <a className='text-xl   font-bold text-black dark:text-white  hover:underline hover:cursor-pointer ' onClick={() => { navigate(`/app/products?productId=${element.id}`) }} > {element.sizeA} </a> <br />
                 <span className='text-sm  '> {element.sizeB} </span> <br />
                 <span className='text-sm  font-semibold select-none'>
                     Rs.{element.cost}/kg
@@ -81,13 +86,14 @@ const ProductCard = ({ element    }: { element: Product   }) => {
                 <button
                     onClick={() => { 
                     if(user.username) { 
-                     postMutation.mutate(element.id) ; 
-                       setIsCartOpen(true) ; }
+                       const addPromise =  handleAdd() ;  
+                       toast.promise(addPromise ,  { loading : "Adding product to cart."  ,   success : "Product added to cart."  , error : "Error while adding product to cart." } )
+                     }
                     else { 
-                    alert('Create an account to access cart functionalities.')
+                    toast.error("Login to access cart.")
                     }
                     }}
-                    className='bg-black text-white rounded-[12px] px-2 py-[1px]  w-[100%]'
+                    className='bg-black dark:bg-white text-white dark:text-black rounded-[12px] px-2 py-[1px]  w-[100%]'
                 >
                     Add to cart
                 </button>

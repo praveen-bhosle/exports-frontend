@@ -5,6 +5,7 @@ import MenuBar from './MenuBar';
 import ProfileBar from './ProfileBar';
 
 
+import { useTheme } from '../hooks/useTheme';
 
 const Header2 = () => {
 
@@ -14,18 +15,24 @@ const Header2 = () => {
     const  isProfileBarOpen     = useStore(state => state.isProfileBarOpen) ;
     const  setIsProfileBarOpen  = useStore(state => state.setIsProfileBarOpen) ;
     const  isMenuBarOpen        = useStore(state => state.isMenuBarOpen) ;
-    const  setIsMenuBarOpen     = useStore(state => state.setIsMenuBarOpen) ; 
-    return (
-        <div className='border  w-full fixed  bg-white  top-[0px] left-[0px] z-10'>
+    const  setIsMenuBarOpen     = useStore(state => state.setIsMenuBarOpen) ;  
+  
+  
+
+    const {theme ,toggleTheme } = useTheme() ; 
+
+    return ( 
+        <> 
+        <div className='  w-full fixed  bg-white dark:bg-black  text-black dark:text-white top-[0px] left-[0px] z-10 py-[1px]'>
             <div className='flex justify-between  mb-2  align-center mx-4 mt-[9px] h-[30px] '>
-                <div className='flex  gap-4  border-2 border-white'>
+                <div className='flex  gap-4  '>
                     {user.username ?
                         <button className=' rounded-[25px]  overflow-hidden' onClick={
                             () => {
                                 setIsProfileBarOpen(!isProfileBarOpen);
                             }
                         }>
-                            {isProfileBarOpen ? <img src='/close.svg' alt='profile' width={25} height={25} /> : <img src='/profile1.svg' width={25} height={25} alt='image' />}
+                            {isProfileBarOpen ? <img src='/close.svg' alt='profile' width={25} height={25} style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } }  /> : <img src='/profile1.svg' width={25} height={25} alt='image' style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } }  />}
                         </button>
                         :
                         <button
@@ -35,12 +42,12 @@ const Header2 = () => {
                             className=''
                         >
                             {isMenuBarOpen ? (
-                                <img src='/close.svg' width={25} height={25} alt='image' />
+                                <img src='/close.svg' width={25} height={25} alt='image' style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } }  />
                             ) : (
-                                <img alt='image' src='/menu.svg' width={25} height={25} />
+                                <img alt='image' src='/menu.svg' width={25} height={25}  style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } }   /> 
                             )}
                         </button>}
-                    <Link to='/app'> <img src='/home.svg' alt='home' width={25} height={25} />   </Link>
+                    <Link to='/app'> <img src='/home.svg' alt='home' width={25} height={25}  style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } } className='relative top-[2px]'   />   </Link>
                 </div>
                 <div className='flex  gap-2'>
                     <div className='relative bottom-[4px]'>
@@ -48,26 +55,19 @@ const Header2 = () => {
                             <img src='/logp.jpeg' alt='logo' width={40} height={40} />
                         </Link>
                     </div>
-                    <div className='text-black font-bold'>YK Devout Exports</div>
+                    <div className='font-bold'>YK Devout Exports</div>
                 </div>
                 <div className='flex gap-2'>
+                   { theme === 'dark' ? <img src='./sun1.svg' width={25} height={25}  onClick={ toggleTheme} className='relative bottom-[3px]'  />   : <img  src='./moon.svg'  width={25} height={25} onClick={ toggleTheme}  className='relative bottom-[3px]' />    }
+                            
                     <div>
                         <button
                             onClick={() => { 
                                 if( user.username ) setIsCartOpen(true) 
                                 else { alert('You must login to access cart.')} 
                             }}>
-                            <img src='/cart.svg' alt='cart' width={25} height={25} />
+                            <img src='/cart.svg' alt='cart' width={25} height={25} style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } }  />
                         </button>
-                        {/*totalItems !== undefined && totalItems > 0 ? (
-                            <div className='w-[20px] h-[20px] bg-black  text-white  text-[11px] rounded-[10px] relative bottom-[40px] left-[15px] '>
-                                <span className='relative left-[3px] top-[2px] '>{totalItems}</span>
-                            </div>
-                        ) : (
-                            <div className='w-[20px] h-[20px] bg-black  text-white  text-[11px] rounded-[10px] relative bottom-[30px] left-[15px] opacity-0 '>
-                                <span className='relative left-[3px] top-[2px]  '> 00 </span>
-                            </div>
-                        )*/}
                     </div>
                 </div>
             </div>
@@ -78,10 +78,11 @@ const Header2 = () => {
                 <Cart />
             )}
             {isProfileBarOpen && (
-                <ProfileBar />
+                <ProfileBar   />
             )
             }
         </div>
+        </> 
     )
 }
 

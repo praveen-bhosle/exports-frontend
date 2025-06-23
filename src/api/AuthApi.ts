@@ -1,4 +1,6 @@
 
+
+import { useStore } from '../state/Store';
 import { AxiosRequest } from './AxiosApiHandler'
 
 export const login = async ({username, password}: {username: string ,password: string}) => {  
@@ -13,10 +15,12 @@ export const login = async ({username, password}: {username: string ,password: s
       return {   success : false  ,  data :response.data  }  ;  
  }
 
-export const logout = () => {  
+export const logout = () => { 
   try { 
+    const setUser = useStore( store => store.setUser ) ;
     localStorage.removeItem('YKDAuthToken') ;
-    localStorage.removeItem('YKDUsername')  ;   
+    localStorage.removeItem('YKDUsername')  ;  
+    setUser({}) ; 
   } catch (e) {
     console.log(e); 
   }

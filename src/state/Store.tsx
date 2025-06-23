@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import type { User } from "../interfaces/User";
-import type { Profile } from "../interfaces/Profile";
 
 interface Store {
     user: User,
@@ -11,14 +10,12 @@ interface Store {
     setIsProfileBarOpen: (status: boolean) => void,
     isMenuBarOpen: boolean,
     setIsMenuBarOpen: (status: boolean) => void,
-    profile: Profile,
-    setProfile: (profile: Profile) => void, 
     authToastMessage : string , 
     setAuthToastMessage : (msg : string ) => void  
 }
 
  export const  useStore = create<Store>((set) => ({
-    user: { username : null ,   profileCreated: false },
+    user: {} ,
     setUser: (user: User) => { set(() => ({ user })) },
     isCartOpen: false,
     setIsCartOpen: (isCartOpen: boolean) => { set(() => ({ isCartOpen })) },
@@ -26,8 +23,6 @@ interface Store {
     setIsProfileBarOpen: (isProfileBarOpen: boolean) => { set(() => ({ isProfileBarOpen })) },
     isMenuBarOpen: false,
     setIsMenuBarOpen: (isMenuBarOpen: boolean) => { set(() => ({ isMenuBarOpen })) },
-    profile: {},
-    setProfile: (profile: Profile) => { set(() => ({ profile })) } ,
     authToastMessage : "" , 
     setAuthToastMessage : (msg : string) => {  set(() => ({ authToastMessage : msg })) }
 }));

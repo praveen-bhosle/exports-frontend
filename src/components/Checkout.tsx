@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useCartQuery } from "../hooks/useCartQueryMutations"
 import { CartData } from "../utils/CartData";
 import CartItemCard from "./CartItemCard";
+import { DisplayRazorpay } from "../utils/DisplayRazorpay";
 
 const Checkout  = () => {
  
@@ -63,9 +64,9 @@ const Checkout  = () => {
                          <div className='text-lg font-bold'>Rs.{totalCost} </div>
                        </div>
                      </div>
-                    <button  className='bg-black text-white text-xl rounded-[12px] px-4  ' onClick={ () => {   }} > Proceed to pay </button>
+                    <button  onClick={ () => {  DisplayRazorpay ( { amount : totalCost , name : 'praveen' , email : 'praveenbhosle1622@gmail.com', phone : '7349272101' , items  }  ) } } className='bg-black text-white text-xl rounded-[12px] px-4  ' > Proceed to pay </button>
                 </div>           
   )
 }
 
-export default Checkout
+export default Checkout ; 

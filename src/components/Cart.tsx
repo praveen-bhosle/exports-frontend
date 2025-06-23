@@ -4,10 +4,13 @@ import CartItemCard from "./CartItemCard";
 import { useStore } from "../state/Store";
 import { useCartQuery } from "../hooks/useCartQueryMutations";
 import { CartData } from "../utils/CartData";
+import { useTheme } from "../hooks/useTheme";
 
 const Cart = () => { 
 
-    const {query} = useCartQuery() ;
+    const {query} = useCartQuery() ; 
+
+    const {theme} = useTheme() ;
 
     const setIsCartOpen  = useStore( (state) => state.setIsCartOpen ); 
 
@@ -25,14 +28,14 @@ const Cart = () => {
              <div className="">
                 <div className='px-4 py-2  rounded-md z-50'>
                     <div className='mb-2  align-center flex'>
-                        <span className='text-black font-bold mr-2'>
+                        <span className='text-black dark:text-white font-bold mr-2'>
                             Shopping Cart {`(${totalItems})`}
                         </span>
                         <button
                             onClick={() => setIsCartOpen(false)} 
-                            className='hover:bg-gray-100 rounded-md'
+                           
                         >
-                            <img src='/close.svg' width={25} height={25} alt='close' />
+                            <img src='/close.svg' width={25} height={25} alt='close' style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } }  />
                         </button>
                     </div>
     
@@ -40,8 +43,8 @@ const Cart = () => {
                         {cartItems?.map( (item,index) => <CartItemCard key={ index} cartItem={item} />)}
                     </div>
     
-                    <div className='mt-2 flex bg-black justify-between p-2 align-center'>
-                        <div className=' font-extrabold text-white border-white   align-center  '>
+                    <div className='mt-2 flex justify-between p-2 align-center'>
+                        <div className=' font-extrabold  dark:text-white  border-white   align-center  '>
                             <span className='block  relative top-[6px] '>
                                 Total Price: Rs.{totalCost}.00 
                             </span>

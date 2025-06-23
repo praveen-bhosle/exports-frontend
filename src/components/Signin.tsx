@@ -43,7 +43,7 @@ const Signin = () => {
             <label className='block  mb-[2px]' htmlFor='username'>Username</label> 
             <input
                 type='text'
-                className='p-2 outline-none text-xs rounded-md bg-[#E9EAF2] text-black w-full'
+                className='p-2 outline-none text-xs rounded-md bg-[#E9EAF2] dark:text-white dark:bg-black  text-black  w-full border-[1px] dark:border-white'
                 id='username'
                 name='username'
                 required
@@ -51,8 +51,8 @@ const Signin = () => {
             <label className='block  ' htmlFor='password'>Password</label>
             <div>
                 <input
-                    className='outline-none text-xs  rounded-sm bg-[#E9EAF2] text-black w-[90%] p-2'
-                    id='password'
+                    className='p-2 outline-none text-xs rounded-md bg-[#E9EAF2] dark:text-white dark:bg-black  text-black  w-[90%] border-[1px] dark:border-white'
+                id='password'
                     type={passwordHidden ? 'password' : 'text'}
                     required
                     name='password'

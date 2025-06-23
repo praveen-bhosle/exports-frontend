@@ -8,8 +8,8 @@ const About  = () => {
         <video src='/promotional.MOV' autoPlay={true} loop muted />
 
       </div>
-      <div className='flex flex-col gap-16 px-8 py-16 bg-[#F7F5F2]'>
-        <div className='text-center text-black text-4xl  font-mono font-bold '> Our story  </div>
+      <div className='flex flex-col gap-16 px-8 py-16 bg-[#F7F5F2] dark:bg-gray-900 dark:text-gray-100'>
+        <div className='text-center text-black dark:text-white text-4xl  font-mono font-bold '> Our story  </div>
         <div className='text-2xl'>  Back in December 2024, our journey began with a goal to bring the highest quality makhana to people who value health and wellness. What started as a passion for creating healthy snack options has grown into a mission to make premium, nutrient-rich makhana easily accessible to everyone. </div>
         <div className='text-2xl'> In today's fast-paced world, finding snacks that are both healthy and satisfying can be a challenge. Most snacks are filled with empty calories, artificial additives, and unhealthy fats. We wanted to change that. </div>
         <div className='text-2xl'> We believe in a healthier way to snack  that nourishes your body without compromising on taste. Our makhana is not just a snack, it's a promise of quality, wellness, and sustainability. From sourcing the finest ingredients to ensuring every bite is fresh and flavorful, we focus on creating products that you can trust. </div>

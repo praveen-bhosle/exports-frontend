@@ -9,17 +9,9 @@ import { FilterProducts } from "../utils/FilterProducts";
 import { useSearchParams } from "react-router-dom";
 
 const Products = () => {
-    const query = useQuery({ queryKey: ['products'], queryFn: getProducts })
-   // const [quality, setQuality] = useState('handpicked');  
-   
+    const query = useQuery({ queryKey: ['products'], queryFn: getProducts })  
     const [searchParams, setSearchParams] = useSearchParams(); 
-
     const [quality, setQuality] = useState(searchParams?.get('quality') ? searchParams?.get('quality') : 'handpicked');  
-    
-
-    
-
-
     useEffect( () => {  
         if(query.status === 'success' && quality) {  
         searchParams.set( 'quality' , quality ) ; setSearchParams(searchParams) ;  
@@ -51,7 +43,7 @@ const Products = () => {
     if(quality=='handpicked') {  
     return ( 
         <>
-            <div className=' py-2 px-2' >
+            <div>
                 <Header3 quality={quality} setQuality={setQuality} />
                 <div className='grid grid-cols-2 gap-2 mt-2 sm:grid-cols-3   md:grid-cols-3 xl:grid-cols-4'>
                     {hP.map((product, index) =>  { return (  <ProductCard key={index} element={product} /> ) }  )}
@@ -62,7 +54,7 @@ const Products = () => {
     else if(quality=='semi-handpicked') {  
         return ( 
             <>
-                <div className=' py-2 px-2' >
+                <div>
                     <Header3 quality={quality} setQuality={setQuality} />
                     <div className='grid grid-cols-2 gap-2 mt-2 sm:grid-cols-3   md:grid-cols-3 xl:grid-cols-4'>
                         {shP.map((product, index) =>  { return (  <ProductCard key={index} element={product} /> ) }  )}
@@ -74,7 +66,7 @@ const Products = () => {
     else if (quality=='machine-picked') { 
         return ( 
             <>
-                <div className=' py-2 px-2' >
+                <div>
                     <Header3 quality={quality} setQuality={setQuality} />
                     <div className='grid grid-cols-2 gap-2 mt-2 sm:grid-cols-3   md:grid-cols-3 xl:grid-cols-4'>
                         {mP.map((product, index) =>  { return (  <ProductCard key={index} element={product} /> ) }  )}
@@ -85,7 +77,7 @@ const Products = () => {
     } 
     else { 
         return( 
-            <div className=' py-2 px-2' >
+            <div>
             <Header3 quality={quality} setQuality={setQuality} />
              <div> Invalid query parameters.</div>
             </div>

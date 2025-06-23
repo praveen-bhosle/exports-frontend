@@ -36,9 +36,9 @@ const AddressForm = ( { stateFn  ,  mutationFn   } : { stateFn : React.Dispatch<
 
     <div className="flex flex-col">
     <h1 className="font-bold text-xl"> Add a new address </h1> <br/> 
-    <button className="w-full  p-2 font-bold cursor-pointer border-2" >Autofill your current location.</button> 
+    <button className="w-full  p-2 font-bold cursor-pointer border-2 border-white dark:border-gray-400" >Autofill your current location.</button> 
 
-    <form  className="form"  onSubmit={ (e) => {  const myPromise = handleSubmit(e)  ;  toast.promise( myPromise ,  { loading  : "Adding address." }) }  } > 
+    <form  className="form"  onSubmit={ (e) => {  const myPromise = handleSubmit(e)  ;  toast.promise( myPromise ,  { loading  : "Adding address..." , success : "Adress added." }) }  } > 
         <label htmlFor="fullname"  > Fullname * </label> 
         <input type="text" name="fullname"  id="fullname" required />
         <label htmlFor="mobil_number"> Mobile number *   </label>
@@ -62,7 +62,7 @@ const AddressForm = ( { stateFn  ,  mutationFn   } : { stateFn : React.Dispatch<
     </form>
 
     
-    <button onClick={ () => stateFn( prev => !prev )    }  className="cursor-pointer font-bold bg-black text-white rounded-[5px]" > Go back </button>
+    <button onClick={ () => stateFn( prev => !prev )    }  className="button" > Go back </button>
 
     </div>
   )

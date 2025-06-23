@@ -26,24 +26,24 @@ const Signup = () => {
     return (
         <div className='flex flex-col gap-2 text-xl font-bold'> 
             <form  onSubmit={ (e) => {  handleSignUp(e)  }}> 
-            <label className='block mb-[2px]' htmlFor='username'>Username</label>
+            <label className='block  mb-[2px]' htmlFor='username'>Username</label> 
             <input
                 type='text'
-                className='p-2 outline-none text-xs rounded-md bg-[#E9EAF2] text-black w-full'
+                className='p-2 outline-none text-xs rounded-md bg-[#E9EAF2] dark:text-white dark:bg-black  text-black  w-full border-[1px] dark:border-white'
                 id='username'
-                required
                 name='username'
+                required
             />
-            <label className='block ' htmlFor='password'>Password</label>
+            <label className='block  ' htmlFor='password'>Password</label>
             <div>
                 <input
-                    className='outline-none text-xs  rounded-sm bg-[#E9EAF2] text-black w-[90%] p-2'
-                    id='password'
+                    className='p-2 outline-none text-xs rounded-md bg-[#E9EAF2] dark:text-white dark:bg-black  text-black  w-[90%] border-[1px] dark:border-white'
+                id='password'
                     type={passwordHidden ? 'password' : 'text'}
-                    required 
+                    required
                     name='password'
                 />
-                <span className="w-max  " onClick={() => setPasswordHidden(!passwordHidden)}>  {passwordHidden ? <img className="inline" src='/eye.svg' alt="" width={20} height={20} /> : <img alt="" className="inline" src='/eyeclose.svg' width={20} height={20} />}  </span>
+                <span className="w-max" onClick={() => setPasswordHidden(!passwordHidden)}>  {passwordHidden ? <img className="inline" src='/eye.svg' alt="" width={20} height={20} /> : <img alt="" className="inline" src='/eyeclose.svg' width={20} height={20} />}  </span>
             </div>
             <SubmitButton2  text="Sign up" />  
             </form>

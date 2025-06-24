@@ -19,7 +19,7 @@ const ProfileBar = ( ) => {
     
    
 
-    const naviagate = useNavigate() ; 
+    const navigate = useNavigate() ; 
 
     return (
         <> 
@@ -33,9 +33,9 @@ const ProfileBar = ( ) => {
                     <div onClick = { () => {  setProfileFormOpen(true)  } }>Create Profile</div>}
             </div>
 
-            <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer'> My orders   </div> 
-            <div className="w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer"  onClick={ () => { naviagate('/app/account') }} > My account </div>
-            <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer' onClick={ () =>  { naviagate('/app/addresses')  ; setIsProfileBarOpen(false) ;  }  } > My addresses   </div>
+            <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer' onClick= { () => navigate('/app/orders') }> My orders   </div> 
+            <div className="w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer"  onClick={ () => { navigate('/app/account') }} > My account </div>
+            <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer' onClick={ () =>  { navigate('/app/addresses')  ; setIsProfileBarOpen(false) ;  }  } > My addresses   </div>
             <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer'  > Settings </div>
             <div className=' w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md cursor-pointer' onClick={  () => {  logout();}}> Log out  </div>
         </div>

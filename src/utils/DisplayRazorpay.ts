@@ -1,19 +1,28 @@
 import toast from "react-hot-toast";
 import { LoadScript } from "./LoadScript";
 
-import axios from "axios"; 
-import type { CartItem } from "../interfaces/CartItem";
+
+import { AxiosRequest } from "../api/AxiosApiHandler" ; 
 
 
-export async function  DisplayRazorpay({amount , name , email  , phone , items   } : { amount : number , name : string  , email : string  , phone : string , items : CartItem[]  } ) { 
+export async function  DisplayRazorpay({amount , name , email  , phone   } : { amount : number , name : string  , email : string  , phone : string  } ) { 
+ 
+   
+    const toastId =  toast.loading("creating order.") ; 
+
     const res = await LoadScript("https://checkout.razorpay.com/v1/checkout.js") ; 
     console.log(res) ; 
 
-    if(!res) { toast.error("Failure in loading sdk") ; return  ;  }
+    if(!res) { toast.dismiss(toastId) ; toast.error("Failure in loading sdk") ; return  ;  }
     
-    const result = await axios.post(`http://localhost:5000/api/public/payment/create-order?amount=${amount}`) ;
+    const result = await  AxiosRequest( { url :  `user/payment/create-order?amount=${1}` , method : 'post' } ) ;  
 
-    if(!result) { toast.error("server side error") ; return   ;  }
+    console.log(result.data) ; 
+
+    if(result.status !== 201 ) { toast.dismiss(toastId) ;   toast.error("Error while creating order.") ; return   ;  }
+
+    toast.dismiss(toastId)  ; 
+    toast.success("Order created with unpaid status.Pay the amount now.")  ;
 
     const { id : order_id} = result.data ; 
 
@@ -27,7 +36,7 @@ export async function  DisplayRazorpay({amount , name , email  , phone , items  
         "order_id": order_id ,
         "handler": async function (response:any){
             const data = { razorpay_payment_id :  response.razorpay_payment_id ,razorpay_order_id :  response.razorpay_order_id ,razorpay_signatue :  response.razorpay_signature } ; 
-            const result = await axios.post( "http://localhost:5000/api/user/payment/payment-callback" , data ) ; 
+            const result = await AxiosRequest({ url  : `user/payment/payment-callback?orderId=${order_id}` , method : 'post' , body : data   })  ;  
             toast.success(result.data) ; 
         },
         "prefill": {
@@ -46,6 +55,10 @@ export async function  DisplayRazorpay({amount , name , email  , phone , items  
      //@ts-ignore
      const paymentObject = new window.Razorpay(options) ; 
      paymentObject.open() ;  
+
+     return true ; 
+
+
 
 
  }

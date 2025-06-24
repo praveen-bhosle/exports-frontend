@@ -3,11 +3,12 @@ import type { Product } from "./Product"
 export interface  orderedProduct { 
    id : number ,  
    quantity :number , 
-   products : Product[]
+   product : Product 
 }
 
 export interface Order { 
    id : number ,  
    totalCost : number ,  
-   orderedProducts :  orderedProduct[]
+   orderedProducts :  orderedProduct[] , 
+   orderStatus: number 
 }

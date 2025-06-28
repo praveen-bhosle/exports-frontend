@@ -3,10 +3,10 @@ import { getProducts } from "../api/ProductsApi";
 import ProductCard from "./ProductCard";
 import { useEffect, useState } from "react";
 import { Header3 } from "./Header3";
-import ProductsLoading from "./ProductsLoading";
 import type { Product } from "../interfaces/Product";
 import { FilterProducts } from "../utils/FilterProducts";
 import { useSearchParams } from "react-router-dom";
+import ProductCardLoader from "./ProductCardLoader";
 
 const Products = () => {
     const query = useQuery({ queryKey: ['products'], queryFn: getProducts })  
@@ -21,8 +21,19 @@ const Products = () => {
     if (query.status === 'pending') {
         return (
             <>
-                <Header3 quality={quality} setQuality={setQuality} />
-                <ProductsLoading />
+                <Header3 quality={quality} setQuality={setQuality} /> 
+                <div className="mt-2 gap-2 grid grid-cols-2  sm:grid-cols-3   md:grid-cols-3 xl:grid-cols-4" > 
+                     <ProductCardLoader /> 
+                     <ProductCardLoader /> 
+                     <ProductCardLoader />
+                     <ProductCardLoader /> 
+                     <ProductCardLoader /> 
+                     <ProductCardLoader />
+                     <ProductCardLoader /> 
+                     <ProductCardLoader /> 
+                     <ProductCardLoader />
+                </div>
+                
             </>
         )
     }

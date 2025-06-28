@@ -24,7 +24,7 @@ const ProductCard2 = ({ element }: { element: Product }) => {
     };
 
     return (
-        <div className='shadow-custom hover:shadow-hoverCustom  transition:shadow border-[1px] rounded-[3px]'>
+        <div className='shadow-custom hover:shadow-hoverCustom  transition:shadow  rounded-[3px]'>
             <Carousel
                 swipeable={false}
                 draggable={false}

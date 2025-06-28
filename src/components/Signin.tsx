@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { login } from "../api/AuthApi";
 import SubmitButton2 from "../UIComponents/SubmitButton2";
 import toast  from "react-hot-toast";
+import { useTheme } from "../hooks/useTheme";
 //import { useStore } from "../state/Store";
 //import toast, { type Renderable, type ValueOrFunction } from "react-hot-toast";
 
@@ -12,6 +13,8 @@ const Signin = () => {
 
     const [passwordHidden, setPasswordHidden] = useState(true);      
     const navigate = useNavigate() ;    
+
+    const {theme } = useTheme( ) ;
 
     const handleLogin = async  (e:React.FormEvent<HTMLFormElement>) => {    
         e.preventDefault(); 
@@ -57,7 +60,7 @@ const Signin = () => {
                     required
                     name='password'
                 />
-                <span className="w-max" onClick={() => setPasswordHidden(!passwordHidden)}>  {passwordHidden ? <img className="inline" src='/eye.svg' alt="" width={20} height={20} /> : <img alt="" className="inline" src='/eyeclose.svg' width={20} height={20} />}  </span>
+                <span className="w-max" onClick={() => setPasswordHidden(!passwordHidden)}>  {passwordHidden ? <img className="inline" src='/eye.svg' alt="" width={20} height={20}   style = {{ filter : theme==='dark' ? 'invert(1)' : 'none' }} /> : <img alt="" className="inline" src='/eyeclose.svg' width={20} height={20} style = {{ filter : theme==='dark' ? 'invert(1)' : 'none' }} />}  </span>
             </div>
             <SubmitButton2 text="Login" />  
            

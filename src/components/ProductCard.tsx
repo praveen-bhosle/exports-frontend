@@ -1,10 +1,9 @@
-import { Suspense } from 'react'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import type { Product } from '../interfaces/Product';
 import { useStore } from '../state/Store';
 import { useCartMutations } from '../hooks/useCartQueryMutations';
-import Loading from './Loading';
+
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -42,11 +41,10 @@ const ProductCard = ({ element    }: { element: Product   }) => {
  
     return (
 
-        <div className='flex flex-col gap-2  rounded-[8px] p-[4px] shadow-custom hover:shadow-hoverCustom  transition:shadow  border-black dark:border-white border-[1px] sm:border-[2px] md:border-[2px] '>
+        <div className='flex flex-col gap-2  rounded-[8px] p-4 shadow-custom hover:shadow-hoverCustom  transition:shadow  cursor-pointer  hover:dark:bg-[#1E1E1E] '>
 
             <div className='basis-3/4'>
               
-                <Suspense fallback={<Loading />}>
                     <Carousel
                         swipeable={false}
                         draggable={false}
@@ -56,8 +54,8 @@ const ProductCard = ({ element    }: { element: Product   }) => {
                         infinite={true}
                         autoPlay={false}
                         keyBoardControl={true}
-                        customTransition="all .5"
-                        transitionDuration={500}
+                        
+                        transitionDuration={0}
                         containerClass="carousel-container"
                         dotListClass="custom-dot-list-style"
                         itemClass="carousel-item-padding-40-px"
@@ -70,10 +68,9 @@ const ProductCard = ({ element    }: { element: Product   }) => {
                         )
                         }
                     </Carousel>
-                </Suspense>
-            
+             
             </div>
-
+            
             <div className='basis-1/5 '>
                 <a className='text-xl   font-bold text-black dark:text-white  hover:underline hover:cursor-pointer ' onClick={() => { navigate(`/app/products?productId=${element.id}`) }} > {element.sizeA} </a> <br />
                 <span className='text-sm  '> {element.sizeB} </span> <br />

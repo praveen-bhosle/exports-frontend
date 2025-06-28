@@ -1,6 +1,3 @@
-
-
-import { useStore } from '../state/Store';
 import { AxiosRequest } from './AxiosApiHandler'
 
 export const login = async ({username, password}: {username: string ,password: string}) => {  
@@ -17,10 +14,8 @@ export const login = async ({username, password}: {username: string ,password: s
 
 export const logout = () => { 
   try { 
-    const setUser = useStore( store => store.setUser ) ;
     localStorage.removeItem('YKDAuthToken') ;
     localStorage.removeItem('YKDUsername')  ;  
-    setUser({}) ; 
   } catch (e) {
     console.log(e); 
   }
@@ -28,7 +23,10 @@ export const logout = () => {
 
 export const signup = async ( { username  , password } : { username : string , password : string  }) => {     
     const response =   await AxiosRequest({ method : 'post' , url:'/public/signup' , body : { username , password }  }) ; 
-    return response.status == 201 ; 
+    if(response.status === 201 ) {      
+      return {  data  : response.data ,  success : true  } ;    
+      }
+      return {   success : false  ,  data :response.data  }  ; 
 }
 
 export const verifyEmailApi = async (  email : string   )  => {   

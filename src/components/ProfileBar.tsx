@@ -13,6 +13,7 @@ const ProfileBar = ( ) => {
 
     const setIsProfileBarOpen  = useStore( (state) => state.setIsProfileBarOpen) ; 
     const user = useStore( state => state.user ) ; 
+    const setUser = useStore( state => state.setUser) ; 
     
     const [profileFormOpen,setProfileFormOpen]  = useState(false) ;   
 
@@ -37,7 +38,7 @@ const ProfileBar = ( ) => {
             <div className="w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer"  onClick={ () => { navigate('/app/account') }} > My account </div>
             <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer' onClick={ () =>  { navigate('/app/addresses')  ; setIsProfileBarOpen(false) ;  }  } > My addresses   </div>
             <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer'  > Settings </div>
-            <div className=' w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md cursor-pointer' onClick={  () => {  logout();}}> Log out  </div>
+            <div className=' w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md cursor-pointer' onClick={  () => {  logout(); setUser({}) }}> Log out  </div>
         </div>
         {  profileFormOpen && <Modal> <ProfileForm forEdit={false} setProfileFormOpen={ setProfileFormOpen}  />  </Modal>    }
         

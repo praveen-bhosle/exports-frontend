@@ -9,7 +9,7 @@ const OrderedProductCard = ({ orderedProduct }: {
 
     return (
         <>
-            <div className='flex m-2 border-[1px] p-[4px] rounded-[5px]'>
+            <div className='flex   p-8 rounded-[5px] dark:bg-[#2e2e2e]'>
                 <div className='w-[120px]'>
                     <ProductCard2 element={product} />
                 </div>

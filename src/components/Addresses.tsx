@@ -4,10 +4,31 @@ import AddressCard from "./AddressCard";
 import Modal from "./Modal";
 import AddressForm from "./AddressForm"; 
 import { useState } from "react";
+import { ButtonLoader2 } from "./ButtonLoader2";
+import AddressCardLoader from "./AddressCardLoader";
+
 
 const Addresses = () => { 
   const { query ,  postMutation  , editMutation , deleteMutation  } = useAddressQueryMutations( ) ;   
   const [ addState ,  setAddstate] = useState(false) ;  
+
+  if(query.status==='pending') { 
+    return ( 
+      <div> 
+      <div className="text-xl font-bold">Your Addresses</div>     
+      <div className="grid gap-4  sm:grid-cols-2  md:grid-cols-3 xl:grid-cols-4"> 
+        <AddressCardLoader /> 
+        <AddressCardLoader /> 
+        <AddressCardLoader /> 
+        <AddressCardLoader /> 
+        <AddressCardLoader /> 
+        <AddressCardLoader /> 
+      </div>
+      <br/> 
+      <ButtonLoader2  />
+      </div>
+    )
+  }
 
   if(query.status === 'success'  && query.data.addresses  ) { 
   return ( 

@@ -38,6 +38,7 @@ export async function  DisplayRazorpay({amount , name , email  , phone   } : { a
             const data = { razorpay_payment_id :  response.razorpay_payment_id ,razorpay_order_id :  response.razorpay_order_id ,razorpay_signatue :  response.razorpay_signature } ; 
             const result = await AxiosRequest({ url  : `user/payment/payment-callback?orderId=${order_id}` , method : 'post' , body : data   })  ;  
             toast.success(result.data) ; 
+            window.location.reload() ; 
         },
         "prefill": {
             "name": name , 
@@ -55,10 +56,4 @@ export async function  DisplayRazorpay({amount , name , email  , phone   } : { a
      //@ts-ignore
      const paymentObject = new window.Razorpay(options) ; 
      paymentObject.open() ;  
-
-     return true ; 
-
-
-
-
  }

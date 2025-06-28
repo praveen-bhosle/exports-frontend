@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+
 import { useCartQuery } from "../hooks/useCartQueryMutations"
 import { CartData } from "../utils/CartData";
 import CartItemCard from "./CartItemCard";
@@ -10,7 +10,7 @@ const Checkout  = () => {
  
   const {query}  = useCartQuery() ;   
 
-  const [ gateway ,setGateway ] = useState('') ;
+ // const [ gateway ,setGateway ] = useState('') ;
 
   if(query.status === 'pending') { return <div> Loading products </div>  } 
 
@@ -38,20 +38,8 @@ const Checkout  = () => {
                     </div>
                     
                     <div className='p-2 border-2 border-gray-200' >
-                        <div className='font-bold text-black'> Payment Method </div>
+                        <div className='font-bold text-black dark:text-white'  > Payment Method </div>
                         <div className='text-xs'>All transactions are secure and encrypted.</div>
-                        <div>
-                            <form>
-                                <label className='block w-full'>
-                                   <input type='radio' name='gateway' value='razorpay' onClick={() => setGateway('Razorpay')} />
-                                   <span> Razorpay  </span>
-                                </label>
-                                <label className='block w-full'>
-                                   <input type='radio' name='gateway' value='paypal' onClick={() => setGateway('Paypal')} />
-                                   <span> Paypal </span>
-                                </label>
-                            </form>
-                        </div>
                     </div>
                     <div>
                        <div className='flex justify-between'>
@@ -68,9 +56,7 @@ const Checkout  = () => {
                        </div>
                      </div>
                     <button  
-                    onClick={ async () => {  const res =  await   DisplayRazorpay ( { amount : totalCost , name : 'praveen' , email : 'praveenbhosle1622@gmail.com', phone : '7349272101' } )  ; 
-                                        if(res) navigate('/app/orders') 
-                                       } 
+                    onClick={ async () => {     DisplayRazorpay ( { amount : totalCost , name : 'praveen' , email : 'praveenbhosle1622@gmail.com', phone : '7349272101' }).then( () => navigate('/app/orders') ) } 
                             }   
                     className='bg-black text-white text-xl rounded-[12px] px-4' > Proceed to pay </button>
                 </div>           
@@ -78,3 +64,18 @@ const Checkout  = () => {
 }
 
 export default Checkout ; 
+
+/* 
+ <div>
+                            <form>
+                                <label className='block w-full'>
+                                   <input type='radio' name='gateway' value='razorpay' onClick={() => setGateway('Razorpay')} />
+                                   <span> Razorpay  </span>
+                                </label>
+                                <label className='block w-full'>
+                                   <input type='radio' name='gateway' value='paypal' onClick={() => setGateway('Paypal')} />
+                                   <span> Paypal </span>
+                                </label>
+                            </form>
+                        </div>
+*/ 

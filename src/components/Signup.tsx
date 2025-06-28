@@ -3,11 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../api/AuthApi";
 
 import SubmitButton2 from "../UIComponents/SubmitButton2";
+import toast from "react-hot-toast";
+import { useTheme } from "../hooks/useTheme";
 
 const Signup = () => {
 
     const [passwordHidden, setPasswordHidden] = useState(true);
     const navigate = useNavigate() ;  
+
+    const {theme} = useTheme() ; 
 
     const handleSignUp = async  (e :React.FormEvent<HTMLFormElement>) => {    
         e.preventDefault() ;
@@ -17,7 +21,8 @@ const Signup = () => {
         console.log(password);
         console.log(username) ;
         if(username && password) { 
-        const success = await signup({ username , password }) ;
+        const {success,data} = await signup({ username , password }) ;
+        if(!success)  { toast.error(data) ;  return Promise.reject('') ;  } 
         if(success) navigate('/auth/login') ; 
     }    
     }
@@ -25,7 +30,7 @@ const Signup = () => {
 
     return (
         <div className='flex flex-col gap-2 text-xl font-bold'> 
-            <form  onSubmit={ (e) => {  handleSignUp(e)  }}> 
+            <form onSubmit={ (e) =>  { const myPromise =  handleSignUp(e) ;  toast.promise( myPromise ,  { loading : "Logging in..."  ,  success : 'Account created successfully.'  } ) }}> 
             <label className='block  mb-[2px]' htmlFor='username'>Username</label> 
             <input
                 type='text'
@@ -43,7 +48,7 @@ const Signup = () => {
                     required
                     name='password'
                 />
-                <span className="w-max" onClick={() => setPasswordHidden(!passwordHidden)}>  {passwordHidden ? <img className="inline" src='/eye.svg' alt="" width={20} height={20} /> : <img alt="" className="inline" src='/eyeclose.svg' width={20} height={20} />}  </span>
+                <span className="w-max" onClick={() => setPasswordHidden(!passwordHidden)}>  {passwordHidden ? <img className="inline" src='/eye.svg' alt="" width={20} height={20} style = {{ filter : theme==='dark' ? 'invert(1)' : 'none' }} /> : <img alt="" className="inline" src='/eyeclose.svg' width={20} height={20} style = {{ filter : theme==='dark' ? 'invert(1)' : 'none' }} />}  </span>
             </div>
             <SubmitButton2  text="Sign up" />  
             </form>

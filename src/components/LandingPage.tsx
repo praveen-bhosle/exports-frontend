@@ -1,20 +1,22 @@
 import { useState } from 'react'
 
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../hooks/useTheme';
 
 const LandingPage = () => {
 
     const [certificateVisibile, setCertificateVisible] = useState(false);
+    const {theme} = useTheme() ;
     const navigate = useNavigate();
     if (!certificateVisibile) {
         return (
             <>
                 <div className='p-2 flex flex-col gap-8  text-xs sm:text-sm lg:text-md xl:text-lg' >
                     <div className='text-4xl lg:text-6xl xl:text-8xl font-bold font-mono  text-custom-heading' > Premium Makhana for Local & Global Markets  </div>
-                    <div className='border-[1px] rounded-md bg-white dark:bg-[#212121]  p-2'>
+                    <div className='border-[1px] rounded-md bg-white dark:bg-[#212121]  p-2 '>
                         <div className='border-black '>
                             <div className='text-2xl font-bold  text-black dark:text-white mb-2   lg:text-4xl  xl:text-6xl  text-custom-subheading'> Products </div>
-                            <div className='flex flex-col gap-4  w-full items-center md:grid md:grid-cols-2 md:justify-items-start  md:items-start lg:grid   lg:grid-cols-3'>
+                            <div className='  w-full items-center grid gap-2 md:grid-cols-2 md:justify-items-start  md:items-start lg:grid   lg:grid-cols-3'>
                                 <div className='bg-[#FFF5F0] dark:bg-gray-800 border-[1px]  p-2 rounded-md cursor-pointer w-full flex flex-col gap-2 sm:gap-4   ' onClick={() => navigate('/app/?quality=handpicked')}    >
                                     <div className='text-custom-subheading dark:text-white font-bold  text-lg  w-max '>  Handpicked  Makhana </div>
                                     <div className=' font-bold text-xs '> Carefully selected for superior quality, handpicked makhana offers unmatched taste, purity, and freshness, ensuring the best snacking and health  experience.    </div>
@@ -103,7 +105,7 @@ const LandingPage = () => {
     else {
         return (
             <div className='border-2 border-black p-2   m-2'  >
-                <button className='cursor-pointer' onClick={() => setCertificateVisible(false)}>  <img src='/close.svg' alt='' width={20} height={20} />  </button>
+                <button className='cursor-pointer' onClick={() => setCertificateVisible(false)}>  <img src='/close.svg' style = {{ filter : theme ==='dark' ? 'invert(1)' : 'none'  }} alt='' width={20} height={20} />  </button>
                 <img src='/certificate1.png' alt='certificateImage' width={2000} height={900} />
             </div>)
     }

@@ -10,5 +10,6 @@ export interface Order {
    id : number ,  
    totalCost : number ,  
    orderedProducts :  orderedProduct[] , 
-   orderStatus: number 
+   orderStatus: string , 
+   createdAt : Date 
 }

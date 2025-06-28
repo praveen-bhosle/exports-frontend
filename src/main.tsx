@@ -17,6 +17,8 @@ import Checkout from './components/Checkout.tsx'
 import Addresses from './components/Addresses.tsx'
 import Account from './components/Account.tsx'
 import Orders from './components/Orders.tsx'
+import Order from './components/Order.tsx'
+
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,7 @@ createRoot(document.getElementById('root')!).render(
               <Route path="checkout" element= { <Checkout/>  } /> 
               <Route path="addresses" element={ <Addresses/> } /> 
               <Route path='orders' element= {<Orders /> } /> 
+              <Route path='order' element={<Order /> } />
             </Route>
           </Route>
           <Route path="/auth"  element = { <AuthLayout/>} >

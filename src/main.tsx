@@ -18,6 +18,7 @@ import Addresses from './components/Addresses.tsx'
 import Account from './components/Account.tsx'
 import Orders from './components/Orders.tsx'
 import Order from './components/Order.tsx'
+import VerifyEmail2 from './components/VerifyEmail2.tsx'
 
 
 const queryClient = new QueryClient();
@@ -43,6 +44,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="login" element={<Signin />} />
             <Route path="signup" element={<Signup />} />
             <Route path='verifyEmail' element =  { <VerifyEmail/> } />
+            <Route path='verifyEmail2' element = { <VerifyEmail2 />  }/> 
           </Route>
         </Routes>
       </BrowserRouter>

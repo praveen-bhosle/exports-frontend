@@ -23,7 +23,9 @@ const RootLayout = () => {
         if(user)  setUser(user) ;  
     }
 
-    useEffect(() => {  
+    useEffect(() => {   
+        console.log(username) ; 
+        console.log(user.username) ;
         if(username && user.username !== username) { 
             updateUser() ; 
         } }   ,[user] )  ; 

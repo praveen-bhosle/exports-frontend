@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { verifyEmailApi } from "../api/AuthApi";
 import validateEmail from "../validations/validateEmail";
 import SubmitButton2 from "../UIComponents/SubmitButton2";
+import toast from "react-hot-toast";
 
 
 const VerifyEmail = () => {
@@ -15,14 +16,15 @@ const VerifyEmail = () => {
         if(email) { 
         const valid = validateEmail(email) ;  
         if(!valid) { alert('Invalid email.');  return ;   } 
-        const success = await  verifyEmailApi(email) ;
-        if(success) navigate('/app') ;  
+        const {success , data } = await  verifyEmailApi(email) ;
+        if(success) { toast.success('Email sent to ' + email) ;   navigate('/app') ;  return  ;   } 
+        toast.error(data) ;  
         } 
     } 
 
     return (
         <div className='flex flex-col gap-2 font-bold '>
-            <form onSubmit= {(e) =>  handleVerification(e) }> 
+            <form onSubmit= {(e) => {  const myPromise =  handleVerification(e)  ; toast.promise(myPromise , { loading : 'Sending verification link to email id.'});   }  }> 
             <label className='block mb-[2px]' htmlFor='email'>Email</label>
             <input
                 type='text'

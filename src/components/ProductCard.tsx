@@ -41,7 +41,7 @@ const ProductCard = ({ element    }: { element: Product   }) => {
  
     return (
 
-        <div className='flex flex-col gap-2  rounded-[8px] p-4 shadow-custom hover:shadow-hoverCustom  transition:shadow  cursor-pointer  hover:dark:bg-[#1E1E1E] '>
+        <div className='flex flex-col gap-2  border-2 sm:border-[0px] border-black dark:border-white  rounded-[8px] p-4 shadow-custom hover:shadow-hoverCustom  transition:shadow  cursor-pointer  hover:dark:bg-[#1E1E1E] '>
 
             <div className='basis-3/4'>
               
@@ -54,7 +54,6 @@ const ProductCard = ({ element    }: { element: Product   }) => {
                         infinite={true}
                         autoPlay={false}
                         keyBoardControl={true}
-                        
                         transitionDuration={0}
                         containerClass="carousel-container"
                         dotListClass="custom-dot-list-style"

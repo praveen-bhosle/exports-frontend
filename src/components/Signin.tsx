@@ -31,6 +31,7 @@ const Signin = () => {
           if( !email)  navigate('/auth/verifyEmail') ;   
           else navigate('/app') ;  
           toast.success("Logged in successfully.") ; 
+          document.location.reload() ; 
         }
         else { 
           toast.error(response.data) ; 

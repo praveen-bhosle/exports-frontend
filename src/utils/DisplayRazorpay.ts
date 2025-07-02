@@ -28,7 +28,7 @@ export async function  DisplayRazorpay({amount , name , email  , phone   } : { a
 
     console.log(result.data) ;  
     const options = { 
-        key: "rzp_test_ehxRg1TmkA0kFi" , 
+        key: "rzp_live_kIYH76upomNDfz" , 
         "amount": amount * 100  , 
         "currency": "INR",
         "name": "YKDevout Exports", 

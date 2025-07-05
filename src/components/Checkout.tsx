@@ -15,8 +15,6 @@ const Checkout  = () => {
  
   const {query}  = useCartQuery() ;   
 
- // const [ gateway ,setGateway ] = useState('') ;
-
   const [ shippingAddress,setShippingAddress ] = useState<null|Address> (null) ; 
    
   const [ openModal , setOpenModal] = useState(false) ; 
@@ -26,6 +24,8 @@ const Checkout  = () => {
  
   const addressQuery = addressQueryMutations.query ;   
 
+  const navigate = useNavigate() ; 
+
 
 
   if(query.status === 'pending' || addressQuery.status === 'pending' ) { return <div> Loading Checkout. </div>  } 
@@ -34,16 +34,16 @@ const Checkout  = () => {
 
   const data = query.data ; 
   const addressData = addressQuery.data ;
-  if(!data.success || !data.cartItems ||  !addressData.success || !addressData.addresses  )  
-  return( 
+  if(!data.success || !data.cartItems ||  !addressData.success || !addressData.addresses  )  { 
+ return( 
   <div>  Error fetching products.  
     <button onClick={()=> window.location.reload()}> Try again</button>
-  </div>)
+  </div>) } 
 
   const items = data.cartItems ; 
   const addresses = addressData.addresses ;
   const { totalItems , totalCost } = CartData(items) ;
-  const navigate = useNavigate() ; 
+  
  
   const { defaultAddress  } = AddressUtil(addresses) ; 
 
@@ -85,7 +85,14 @@ const Checkout  = () => {
                     <div className="button text-center" onClick = { () => setOpenModal(true)  } > Add a new  address </div>
                   :selection ? 
                     <div> 
-                      <div className="flex flex-col gap-2"> { addresses.map(  (e,index) => <div className="flex  gap-2"> <input type="radio"  checked = {shippingAddress === e }  onClick = { () => { setShippingAddress(e) } } />   <AddressViewCard  address={ e } key={ index} editMutation={ addressQueryMutations.editMutation } /> </div> ) }  </div> 
+                      <div className="flex flex-col gap-2">
+                         { addresses.map(  (e,index) =>
+                              <div className="flex  gap-2"> 
+                                 <input type="radio"  checked = {shippingAddress === e }  onClick = { () => { setShippingAddress(e) } } /> 
+                                 <AddressViewCard  address={ e } key={ index} editMutation={ addressQueryMutations.editMutation } />
+                              </div>)
+                         }  
+                      </div> 
                       <div className="button text-center" onClick = { () => setOpenModal(true)  } > Add a new  address </div>
                       <div className="button text-center" onClick={ ( ) => setSelection(false)} > Deliver to this address </div>
                     </div>

@@ -47,6 +47,8 @@ const Checkout  = () => {
  
   const { defaultAddress  } = AddressUtil(addresses) ; 
 
+  console.log(addresses.length)
+
   if(!shippingAddress && addresses.length!==0 ) { 
     setShippingAddress(defaultAddress) ;
   }
@@ -82,7 +84,7 @@ const Checkout  = () => {
                      </div> 
                 <div className="border-[1px] p-2 "> 
                   { addresses.length === 0 ?  
-                    <div className="button text-center" onClick = { () => setOpenModal(true)  } > Add a new  address </div>
+                    <div className="button text-center" onClick = { () => setOpenModal(true)}  > Add a new  address </div>
                   :selection ? 
                     <div> 
                       <div className="flex flex-col gap-2">
@@ -121,7 +123,7 @@ const Checkout  = () => {
 
                 {  openModal &&  
                 <Modal > 
-                  <AddressForm stateFn={ setOpenModal } mutationFn={addressQueryMutations.postMutation}  firstAddress = { false }   /> 
+                  <AddressForm stateFn={ setOpenModal } mutationFn={addressQueryMutations.postMutation}  firstAddress = { addresses.length === 0 ? true : false  }   /> 
                  </Modal> 
                 }  
     </>       

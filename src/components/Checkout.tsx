@@ -47,7 +47,7 @@ const Checkout  = () => {
  
   const { defaultAddress  } = AddressUtil(addresses) ; 
 
-  if(!shippingAddress) { 
+  if(!shippingAddress && addresses.length!==0 ) { 
     setShippingAddress(defaultAddress) ;
   }
 

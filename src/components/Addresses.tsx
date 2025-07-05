@@ -6,6 +6,7 @@ import AddressForm from "./AddressForm";
 import { useState } from "react";
 import { ButtonLoader2 } from "./ButtonLoader2";
 import AddressCardLoader from "./AddressCardLoader";
+import { AddressUtil } from "@/utils/AddressUtil";
 
 
 const Addresses = () => { 
@@ -30,17 +31,34 @@ const Addresses = () => {
     )
   }
 
-  if(query.status === 'success'  && query.data.addresses  ) { 
+  if(query.status === 'success'  && query.data.addresses  ) {  
+  
+  const firstAddress = query.data.addresses.length === 0  ? true : false ; 
+ 
+  const { defaultAddress , remainingAddresses} = AddressUtil(query.data.addresses) ;
+
+
   return ( 
     <>
     <div> 
-    <div className="text-xl font-bold">Your Addresses</div>     
+    <div className="text-xl font-bold">Your Addresses</div>    
+    { defaultAddress && 
+    <>
+     <span className="text-lg font-bold"> Default Address  </span>
+      <div>
+        <AddressCard address={ defaultAddress }  editMutation = { editMutation} deleteMutation = { deleteMutation} />
+      </div>
+    </>
+     } 
+    <br/> 
+    <hr/>
+    <br/>   
     <div className="grid sm:grid-cols-2 gap-2  md:grid-cols-3 xl:grid-cols-4">  
-      { query.data.addresses.map( (address,index) =>  <AddressCard address={ address }   key={index}  editMutation = { editMutation} deleteMutation = { deleteMutation}  />)} 
+      { remainingAddresses.map( (address,index) => { if(address) return (<AddressCard address={ address }   key={index}  editMutation = { editMutation} deleteMutation = { deleteMutation}  />) }  ) }   
     </div>
-    <button  onClick={ () => setAddstate(true)  } className="button">  Add an address  </button>     
+    <button  onClick={ () => setAddstate(true) } className="button">  Add an address  </button>     
     </div>
-     {addState  && <Modal children= {<AddressForm  stateFn = { setAddstate } mutationFn  = { postMutation}   />} />  } 
+     {addState  && <Modal children= {<AddressForm  stateFn = { setAddstate } mutationFn  = { postMutation} firstAddress = { firstAddress}   />} />  } 
     </>
   )
   }

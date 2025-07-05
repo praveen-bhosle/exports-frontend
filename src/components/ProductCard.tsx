@@ -41,7 +41,7 @@ const ProductCard = ({ element    }: { element: Product   }) => {
  
     return (
 
-        <div className='flex flex-col gap-2  border-2 sm:border-[0px] border-black dark:border-white  rounded-[8px] p-4 shadow-custom hover:shadow-hoverCustom  transition:shadow  cursor-pointer  hover:dark:bg-[#1E1E1E] '>
+        <div className='flex flex-col gap-2  border-[1px] sm:border-[0px] border-black dark:border-white  rounded-[8px]  sm:p-4 shadow-custom hover:shadow-hoverCustom  transition:shadow  cursor-pointer  hover:dark:bg-[#1E1E1E] '>
 
             <div className='basis-3/4'>
               
@@ -70,15 +70,15 @@ const ProductCard = ({ element    }: { element: Product   }) => {
              
             </div>
             
-            <div className='basis-1/5 '>
-                <a className='text-xl   font-bold text-black dark:text-white  hover:underline hover:cursor-pointer ' onClick={() => { navigate(`/app/products?productId=${element.id}`) }} > {element.sizeA} </a> <br />
+            <div className='basis-1/5 p-2 sm:p-0 '>
+                <a className='text-xl   font-bold text-black dark:text-white  hover:underline hover:cursor-pointer  ' onClick={() => { navigate(`/app/products?productId=${element.id}`) }} > {element.sizeA} </a> <br />
                 <span className='text-sm  '> {element.sizeB} </span> <br />
                 <span className='text-sm  font-semibold select-none'>
                     Rs.{element.cost}/kg
                 </span>
             </div>
 
-            <div className='basis-1/20'>
+            <div className='basis-1/20 p-2 sm:p-0'>
                 <button
                     onClick={() => { 
                     if(user.username) { 

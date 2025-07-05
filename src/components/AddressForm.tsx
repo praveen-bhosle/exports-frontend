@@ -6,10 +6,12 @@ import type { Address } from "../interfaces/Address";
 import SubmitButton2 from "../UIComponents/SubmitButton2";
 import toast from "react-hot-toast";
 
-const AddressForm = ( { stateFn  ,  mutationFn   } : { stateFn : React.Dispatch<React.SetStateAction<boolean>> ,  mutationFn  :  UseMutationResult<{
+const AddressForm = ( { stateFn  ,  mutationFn  , firstAddress   } : { stateFn : React.Dispatch<React.SetStateAction<boolean>> ,  mutationFn  :  UseMutationResult<{
   success: boolean;
   data: any;
-}, Error, Address, unknown> }  ) => {
+}, Error, Address, unknown> 
+ , firstAddress : boolean 
+}  ) => {
 
   const postMutation =  mutationFn ;
 
@@ -26,8 +28,8 @@ const AddressForm = ( { stateFn  ,  mutationFn   } : { stateFn : React.Dispatch<
     const city          = formData.get('city')?.toString()           || '' ;
     const state         = formData.get('state')?.toString()          || '' ; 
     const country       = formData.get('country')?.toString()        || '' ; 
-    const isDefault     = formData.get('isDefault')?.toString() ? true : false  ;   
-    const newAddress : Address = { fullName , mobileNumber , pincode  , addr1 , addr2 , landmark , city , state , country , isDefault  } ; 
+    const isDefault     = formData.get('isDefault')?.toString() ? true : false  ;  
+    const newAddress : Address = { fullName , mobileNumber , pincode  , addr1 , addr2 , landmark , city , state , country , isDefault : firstAddress ? true : isDefault  } ; 
     await postMutation.mutateAsync(newAddress) ; 
     stateFn(false) ;
   }
@@ -57,7 +59,7 @@ const AddressForm = ( { stateFn  ,  mutationFn   } : { stateFn : React.Dispatch<
         <input  name="state" required />
         <label htmlFor="country">  Country/Region *  </label>
         <input name="country" required />
-        <label htmlFor="isDefault">Make this my default address <input type="checkbox" name="isDefault"  className="relative top-[2px] left-[2px]" />   </label>
+        <label htmlFor="isDefault">Make this my default address <input type="checkbox" name="isDefault"  className="relative top-[2px] left-[2px]" disabled = { firstAddress} defaultChecked = { firstAddress }  />   </label>
         <SubmitButton2 text="Add address" /> 
     </form>
 

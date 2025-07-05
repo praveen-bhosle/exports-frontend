@@ -28,7 +28,7 @@ const AddressCard = (
   }
 
   return (
-    <div className=" p-2 border-[1px] border-gray-500 dark:border-white text-sm flex flex-col justify-between max-w-[300px] rounded-[5px]">  
+    <div className=" p-2 border-[1px] border-gray-500 dark:border-white text-sm flex flex-col justify-between max-w-[300px] rounded-[5px]">   
         <div className="font-bold">  { address.fullName } </div> 
         <div> {address.addr1 } </div>
         <div> { address.addr2} </div>
@@ -39,12 +39,9 @@ const AddressCard = (
          
         <div className="flex gap-2 underline "> 
            <span className="cursor-pointer" onClick={ () => {  setEditState(true) ;  }} > Edit </span> 
-           <span className="cursor-pointer" onClick={ async () => {  const myPromise =  handleRemove() ;  toast.promise( myPromise ,  { loading :"Deleting address."  , success : "Message deleted successfully." ,  error : ""  }  ) ;  } }> Remove </span>
+           <span className="cursor-pointer" onClick={ async () => {  const myPromise =  handleRemove() ;  toast.promise( myPromise ,  { loading :"Deleting address."  , success : "Address deleted successfully." ,  error : ""  }  ) ;  } }> Remove </span>
            { !address.isDefault   &&   (<span className="cursor-pointer" onClick={() => { const myPromise = handleSetAsDefault() ;    toast.promise( myPromise , { loading : "Setting address as default."  ,  success : "Address set as default."    })} }> Set as default   </span>) }  
         </div>
-
-        
-       
        { editState &&  <Modal children = {  <EditAddressForm address={ address}  stateFn={setEditState}  editMutation = { editMutation}  /> }  />} 
 
     </div>

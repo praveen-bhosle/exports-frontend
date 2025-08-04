@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import {  useState } from 'react';
 import {   useCartMutations } from '../hooks/useCartQueryMutations';
 import type { CartItem } from '../interfaces/CartItem';
 import ProductCard2 from './ProductCard2'
@@ -16,12 +16,12 @@ const CartItemCard = ({ cartItem }: {
     const quantity = cartItem.quantity;
     const id = cartItem.id ; 
 
-    const [ value , setValue ] = useState(quantity.toString(10)) ;  
+    const [ value , setValue ] = useState(quantity) ;  
 
     const [editMode ,setEditMode] = useState(false) ;  
 
     const handleClick = async () => { 
-         await putMutation.mutateAsync(  { cartItemId : id , quantity :  parseInt(value)}) ; 
+         await putMutation.mutateAsync(  { cartItemId : id , quantity :  value}) ; 
          setEditMode(false) ;
     }
 
@@ -29,18 +29,24 @@ const CartItemCard = ({ cartItem }: {
        await deleteMutation.mutateAsync(id) ;
     }
     
-    const input = useRef(null) ; 
+   
 
     const QuanityUI = () => { 
         return ( 
           editMode ?   <> 
-           <div className='inline'>  <input ref ={ input }  className='font-bold w-[60px] ' type='number'  min={500}  step={500} max={5000} value={value} onChange={ (e) => {  if( parseInt(e.target.value) >= 500 && parseInt(e.target.value) <= 5000 && parseInt(e.target.value)%500===0) setValue(e.target.value)}} />  <span className='font-bold'> kg </span> </div>
+           <div className='inline'>   
+            <div className='flex border-2 p-2 gap-2'  >
+            <div className='border-1 select-none cursor-pointer' onClick={() =>{  if(value>500)  setValue(val => val-500) } }> <img src='/minus.svg' width={20} height={20} alt='image' style = { { filter : theme === 'dark' ?  'invert(1)' : 'none'  }} />  </div> 
+            <div> {value} kg  </div>
+            <div className='border-1 select-none cursor-pointer' onClick={() =>{  if(value<5000) setValue(val => val+500) } }> <img src='/plus.svg' width={20} height={20} alt='image' style = { { filter : theme === 'dark' ?  'invert(1)' : 'none'  }} />  </div>
+            </div>
+            </div>
             <button  className='bg-black dark:bg-white  text-white dark:text-black rounded-[12px] px-2 py-[1px] w-[80px]' onClick={ ( ) => {  const editPromise =  handleClick;   toast.promise( editPromise , { loading : "Editing CartItem quantity.",  success : "CartItem quantity changed." } )}}> Update </button>
+           
             </> : <>
             <span className='text-black dark:text-white text-md font-bold select-none '>{quantity} kg</span> 
-            <button  className='bg-black dark:bg-white text-white dark:text-black rounded-[12px] px-2 py-[1px] w-[80px] ' onClick= { () => { setValue(quantity.toString()) ; setEditMode(true) ;
-             // @ts-ignore
-             input.current?.focus()  } }>Edit</button>
+            <button  className='bg-black dark:bg-white text-white dark:text-black rounded-[12px] px-2 py-[1px] w-[80px] ' onClick= { () => { setValue(quantity) ; setEditMode(true) ;
+                   }}>Edit</button>
             </> 
         )
     }
@@ -77,6 +83,8 @@ const CartItemCard = ({ cartItem }: {
                         </button>      
                                      
                     </div>
+                    { editMode &&  <div className='text-xs '>Valid Range: 500-5000 kg</div>  }
+                        
                     
                     <div className='font-bold ' >  
                         Total : Rs.{ quantity * cartItem.product.cost}.00 
@@ -89,3 +97,7 @@ const CartItemCard = ({ cartItem }: {
 }
 
 export default CartItemCard
+
+
+// <input ref ={ input }  className='font-bold w-[60px]' type='number'  min={500}  step={500} max={5000} value={value} onChange={ (e) => {  if( parseInt(e.target.value) >= 500 && parseInt(e.target.value) <= 5000 && parseInt(e.target.value)%500===0) setValue(e.target.value)}} /> 
+            

@@ -64,10 +64,12 @@ const Signin = () => {
                 <span className="w-max" onClick={() => setPasswordHidden(!passwordHidden)}>  {passwordHidden ? <img className="inline" src='/eye.svg' alt="" width={20} height={20}   style = {{ filter : theme==='dark' ? 'invert(1)' : 'none' }} /> : <img alt="" className="inline" src='/eyeclose.svg' width={20} height={20} style = {{ filter : theme==='dark' ? 'invert(1)' : 'none' }} />}  </span>
             </div>
             <SubmitButton2 text="Login" />  
-           
             </form>
             <hr /> 
+            <Link to="/auth/forgotPassword"  className="underline"> Forgot Password  </Link>
+
             <Link to="/auth/signup"  className="underline w-min"> Signup  </Link>
+
         </div>
     
     )

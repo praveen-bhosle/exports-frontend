@@ -6,11 +6,12 @@ const baseURL = import.meta.env.VITE_BACKEND_URL ;
 
 export const AxiosRequest = async ({url,body, method    }: {url: string , body?: {} ,method: string   }) => {
   try {  
-     const token  = localStorage.getItem('YKDAuthToken') ;   
-     const headers = { "Authorization"  : "Bearer " + token  }
+     const token  = localStorage.getItem('YKDAuthToken') ;    
+     const resetPasswordtoken = localStorage.getItem("resetPasswordToken") ; 
+     const headers = { "Authorization"  : "Bearer " + token  , "reset-password-jwtToken" : resetPasswordtoken} ;
      const response = await axios({ method,url  , baseURL , data: body ,  headers  ,withCredentials : true   })  ; 
      return  {  status :  response.status  , data :  response.data ,  headers : response.headers   }  
-   } 
+  }
  catch (e) {
     if (isAxiosError(e)) {
       if (e.response) {

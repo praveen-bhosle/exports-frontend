@@ -36,3 +36,29 @@ export const verifyEmailApi = async (  email : string   )  => {
       return {   success : false  ,  data :response.data  }  ; 
 
 } 
+
+export const getOTPApi = async ( username : string ) => { 
+  const response = await AxiosRequest( { method : 'post' , url :`/public/resetPassword/createOTP?username=${username}`  } ) ; 
+  if(response.status === 200 )   
+  return {  data  : response.data ,  success : true  } ;   
+  return {   success : false  ,  data :response.data  }  ; 
+}
+
+export const verifyOTPApi = async ( code :string , username : string ) => { 
+  const response = await AxiosRequest( { method : 'post' , url :`/public/resetPassword/verifyOTP?code=${code}&username=${username}`  } ) ; 
+  if(response.status === 200 )  { 
+  const { msg , token  }  = response.data ;
+  localStorage.setItem('resetPasswordToken' , token ) ; 
+  return {  data  : msg ,  success : true  } ;   
+  }
+  return {   success : false  ,  data :response.data  }  ; 
+} 
+
+export const resetPasswordApi = async ( password:string ) => { 
+  const response = await AxiosRequest( { method : 'post' , url :`/public/resetPassword/reset?password=${password}`   } ) ; 
+  if(response.status === 200 )  {  
+  localStorage.removeItem('resetPasswordToken') ; 
+  return {  data  : response.data ,  success : true  } ;   
+  }
+  return {   success : false  ,  data :response.data  }  ; 
+} 

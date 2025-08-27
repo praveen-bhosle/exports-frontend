@@ -19,6 +19,7 @@ import Account from './components/Account.tsx'
 import Orders from './components/Orders.tsx'
 import Order from './components/Order.tsx'
 import VerifyEmail2 from './components/VerifyEmail2.tsx'
+import ForgotPassword from './components/ForgotPassword.tsx'
 
 
 const queryClient = new QueryClient();
@@ -45,6 +46,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="signup" element={<Signup />} />
             <Route path='verifyEmail' element =  { <VerifyEmail/> } />
             <Route path='verifyEmail2' element = { <VerifyEmail2 />  }/> 
+            <Route path='forgotPassword' element = { <ForgotPassword/> } /> 
           </Route>
         </Routes>
       </BrowserRouter>

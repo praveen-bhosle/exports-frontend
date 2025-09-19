@@ -1,6 +1,7 @@
 import { getOTPApi, resetPasswordApi, verifyOTPApi } from '@/api/AuthApi';
 import SubmitButton2 from '@/UIComponents/SubmitButton2';
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import {  useNavigate } from 'react-router-dom';
 
@@ -61,6 +62,11 @@ const ForgotPassword = () => {
         } 
         } 
     } 
+   
+  useEffect( () => { 
+      axios.get('https://mailservice-hyd8.onrender.com/test').catch(()=>{}) ;
+  },[])
+
   return (
     <div> 
         <div className='flex flex-col gap-2 text-xl font-bold'>

@@ -26,7 +26,13 @@ export default {
       zIndex  : { 
         'auto' : 'auto' , 
         'n2' : '-2'  
+      } , 
+      fontFamily : { 
+        inter: ['Inter', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
       }
+      
     },
   },
   plugins: [],

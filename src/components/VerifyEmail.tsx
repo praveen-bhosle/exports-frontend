@@ -3,6 +3,8 @@ import { verifyEmailApi } from "../api/AuthApi";
 import validateEmail from "../validations/validateEmail";
 import SubmitButton2 from "../UIComponents/SubmitButton2";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
+import axios from "axios";
 
 
 const VerifyEmail = () => {
@@ -21,6 +23,10 @@ const VerifyEmail = () => {
         toast.error(data) ;  
         } 
     } 
+
+    useEffect( () => { 
+        axios.get('https://mailservice-hyd8.onrender.com/test').catch(()=>{}) ;
+    },[])
 
     return (
         <div className='flex flex-col gap-2 font-bold '>

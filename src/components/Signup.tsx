@@ -30,7 +30,7 @@ const Signup = () => {
 
     return (
         <div className='flex flex-col gap-2 text-xl font-bold'> 
-            <form onSubmit={ (e) =>  { const myPromise =  handleSignUp(e) ;  toast.promise( myPromise ,  { loading : "Logging in..."  ,  success : 'Account created successfully.'  } ) }}> 
+            <form onSubmit={ (e) =>  { const myPromise =  handleSignUp(e) ;  toast.promise( myPromise ,  { loading : "Registering user"  ,  success : 'Account created successfully.'  } ) }}> 
             <label className='block  mb-[2px]' htmlFor='username'>Username</label> 
             <input
                 type='text'

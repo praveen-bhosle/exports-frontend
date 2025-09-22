@@ -66,9 +66,11 @@ const Cart = () => {
                     Rs.{AddCommas(totalCost)}.00
                 </span>
             </div>
+            <SheetClose asChild> 
             <div onClick={() => { navigate('/app/checkout'); }}className='bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-lg py-2 px-6 rounded-lg font-bold cursor-pointer'>
                 CheckOut
             </div>
+            </SheetClose> 
         </div>
     </div>
     )

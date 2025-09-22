@@ -24,7 +24,7 @@ const OrderPage = ( ) => {
  
   if(query.status==='pending') { 
    return(
-    <div className="p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700">
+    <div className="p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700 my-8">
     <div className="font-bold text-lg text-white">
         Loading order details...
     </div>
@@ -33,7 +33,7 @@ const OrderPage = ( ) => {
 
   if(query.status==='error') { 
     return(
-     <div className='p-2 border bg-white dark:bg-[#212121] rounded-[10px] '> 
+     <div className='p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700 my-8'> 
      <div className=" font-bold  ">   
         Error loading order.
      </div> 
@@ -44,7 +44,7 @@ const OrderPage = ( ) => {
 
    if(!success || !data) { 
     return(
-      <div className='p-2 border bg-white dark:bg-[#212121] rounded-[10px] '> 
+      <div className='p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700 my-8 '> 
       <div className=" font-bold  ">   
          Error loading order details. 
       </div> 
@@ -60,7 +60,7 @@ const OrderPage = ( ) => {
         <span className="text-sm text-gray-400">Status: {data.orderStatus}</span>
         <span className="text-xl text-white">Total Cost: Rs.{data.totalCost}</span>
         <hr className="my-2 border-gray-700" />
-        <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+        <div className='grid gap-1  sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-4 xl:grid-cols-5'>
             {data.orderedProducts.map((element, index) => <OrderedProductCard orderedProduct={element} key={index} />)}
         </div>
     </div>

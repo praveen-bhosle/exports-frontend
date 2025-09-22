@@ -10,52 +10,37 @@ import type { Address } from "@/interfaces/Address";
 import Modal from "./Modal";
 import AddressViewCard from "./AdddressViewCard";
 import AddressForm from "./AddressForm";
+import { AddCommas } from "@/utils/AddCommas";
 
 const Checkout  = () => {
  
   const {query}  = useCartQuery() ;   
-
   const [ shippingAddress,setShippingAddress ] = useState<null|Address> (null) ; 
-   
   const [ openModal , setOpenModal] = useState(false) ; 
   const [ selection , setSelection ] = useState(false); 
-  
   const addressQueryMutations  = useAddressQueryMutations() ; 
- 
-  const addressQuery = addressQueryMutations.query ;   
-
+  const addressQuery = addressQueryMutations.query ;  
   const navigate = useNavigate() ; 
 
-
-
-  if(query.status === 'pending' || addressQuery.status === 'pending' ) { return <div> Loading Checkout. </div>  } 
-
-  else if( query.status === 'error' || addressQuery.status === 'error' ) {  return <div> Error fetching products.  <button onClick={()=> window.location.reload()}> Try again</button> </div> }
-
+  if(query.status === 'pending' || addressQuery.status === 'pending' )   {  return <div className="h-[80vh] w-full flex justify-center items-center"> Loading Checkout. </div>  } 
+  else if( query.status === 'error' || addressQuery.status === 'error' ) {  return <div className="h-[80vh] w-full flex justify-center items-center"> Error fetching checkout screen.  <button onClick={()=> window.location.reload()}> Try again</button> </div> }
   const data = query.data ; 
   const addressData = addressQuery.data ;
   if(!data.success || !data.cartItems ||  !addressData.success || !addressData.addresses  )  { 
- return( 
-  <div>  Error fetching products.  
+  return( 
+  <div className="h-[80vh] w-full flex justify-center items-center">  Error fetching products.  
     <button onClick={()=> window.location.reload()}> Try again</button>
   </div>) } 
-
   const items = data.cartItems ; 
   const addresses = addressData.addresses ;
   const { totalItems , totalCost } = CartData(items) ;
-  
- 
   const { defaultAddress  } = AddressUtil(addresses) ; 
-
   console.log(addresses.length)
-
   if(!shippingAddress && addresses.length!==0 ) { 
     setShippingAddress(defaultAddress) ;
   }
-
-
   return  (    
-    <> 
+<> 
 <div className="flex flex-col gap-6 p-6 bg-gray-900 text-white rounded-xl shadow-2xl">
     <div className='font-bold text-3xl text-blue-400'>
         Checkout
@@ -63,16 +48,14 @@ const Checkout  = () => {
     <div className='grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 border border-gray-700 rounded-lg p-4'>
         {items?.map((item, index) => <CartItemCard key={index} cartItem={item} />)}
     </div>
-
     <div className='p-4 bg-gray-800 rounded-lg'>
         <div className='font-bold text-xl'>Payment Method</div>
         <div className='text-sm text-gray-400'>All transactions are secure and encrypted.</div>
     </div>
-    
     <div className="bg-gray-800 p-4 rounded-lg">
         <div className='flex justify-between text-sm text-gray-400 mb-1'>
             <span>Subtotal ({totalItems} items)</span>
-            <span>Rs.{totalCost}</span>
+            <span>Rs.{AddCommas(totalCost)}</span>
         </div>
         <div className='flex justify-between text-sm text-gray-400 mb-1'>
             <span>Shipping</span>
@@ -80,10 +63,9 @@ const Checkout  = () => {
         </div>
         <div className='flex justify-between font-bold text-lg text-white pt-2 border-t border-gray-700 mt-2'>
             <span>Total</span>
-            <span>Rs.{totalCost}</span>
+            <span>Rs.{AddCommas(totalCost)}</span>
         </div>
     </div>
-
     <div className="border border-gray-700 p-4 rounded-lg bg-gray-800">
         {addresses.length === 0 ?
             <div className="button text-center cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors" onClick={() => setOpenModal(true)}>
@@ -129,43 +111,23 @@ const Checkout  = () => {
                 </div>
         }
     </div>
-
     <button
         onClick={async () => {
             DisplayRazorpay({ amount: totalCost, name: 'praveen', email: 'praveenbhosle1622@gmail.com', phone: '7349272101' }).then(() => navigate('/app/orders'));
         }}
-        className='bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-xl rounded-lg px-6 py-3 font-bold'
-    >
+        className='bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-xl rounded-lg px-6 py-3 font-bold'>
         Proceed to pay
     </button>
 </div>
 
 
-                {  openModal &&  
-                <Modal > 
-                  <AddressForm stateFn={ setOpenModal } mutationFn={addressQueryMutations.postMutation}  firstAddress = { addresses.length === 0 ? true : false  }   /> 
-                 </Modal> 
-                }  
-    </>       
-  )
+{   openModal &&  
+    <Modal > 
+      <AddressForm stateFn={ setOpenModal } mutationFn={addressQueryMutations.postMutation}  firstAddress = { addresses.length === 0 ? true : false  }   /> 
+     </Modal> 
+}  
+</>       
+)
 }
 
 export default Checkout ; 
-
-
-
-
-/* 
- <div>
-                            <form>
-                                <label className='block w-full'>
-                                   <input type='radio' name='gateway' value='razorpay' onClick={() => setGateway('Razorpay')} />
-                                   <span> Razorpay  </span>
-                                </label>
-                                <label className='block w-full'>
-                                   <input type='radio' name='gateway' value='paypal' onClick={() => setGateway('Paypal')} />
-                                   <span> Paypal </span>
-                                </label>
-                            </form>
-                        </div>
-*/ 

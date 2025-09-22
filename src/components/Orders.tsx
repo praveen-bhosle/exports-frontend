@@ -5,70 +5,14 @@ import type { Order } from "../interfaces/Order";
 import { useState } from "react";
 import { FilterOrder } from "../utils/FilterOrders";
 import { useNavigate } from "react-router-dom";
-import ButtonLoader from "./ButtonLoader";
-import TextLoader from "./TextLoader";
+
 
 const Orders = () => { 
- 
     const query =  useQuery( { queryKey : ['orders'] , queryFn : getUserOrders })  ; 
-    
     const [filter ,setFilter] = useState('ALL')  ;    
-
     const navigate = useNavigate() ;  
-
-    if(query.status === 'pending') {  
-    return (
-      <div>
-        <div className="font-bold text-2xl mb-4"> My Orders   </div> 
-        <div className="flex mb-2 gap-8 ">   
-          <ButtonLoader/>   <ButtonLoader/>   <ButtonLoader/>   <ButtonLoader/>   <ButtonLoader/> 
-        </div> 
-      <div className="p-4"> 
-      <table className='styled-table'> 
-      <thead> <tr> <th> Id </th>  <th>Price</th> <th>Status</th>  <th>Created At</th>   </tr> </thead> 
-       <tbody> <tr>  <td><TextLoader/></td>  <td><TextLoader/></td> <td><TextLoader/></td> <td><TextLoader/></td>  </tr>  </tbody> 
-       <tbody> <tr>  <td><TextLoader/></td>  <td><TextLoader/></td> <td><TextLoader/></td> <td><TextLoader/></td>  </tr>  </tbody> 
-       <tbody> <tr>  <td><TextLoader/></td>  <td><TextLoader/></td> <td><TextLoader/></td> <td><TextLoader/></td>  </tr>  </tbody> 
-       <tbody> <tr>  <td><TextLoader/></td>  <td><TextLoader/></td> <td><TextLoader/></td> <td><TextLoader/></td>  </tr>  </tbody> 
-       <tbody> <tr>  <td><TextLoader/></td>  <td><TextLoader/></td> <td><TextLoader/></td> <td><TextLoader/></td>  </tr>  </tbody> 
-      </table>
-      </div>
-      </div>)
-    }
-    if( query.status === 'error'   ) { 
-    return (
-        <div>
-          <div className="font-bold text-xl"> Orders   </div>
-          <div className="">  Error loading products. </div> 
-        </div> )
-    } 
-
-    if( !query.data) { 
-        return ( 
-        <div>
-            <div className="font-bold text-xl"> Orders   </div>
-            <div className="">  Error loading products. </div> 
-        </div> 
-        )
-    }
-
-    const { success , data  }  = query.data ; 
-
-    if(!success || !data ) { 
-        return ( 
-            <div>
-              <div className="font-bold text-xl"> Orders   </div>
-              <div className="">  Error loading products. </div> 
-            </div> 
-        )
-    }
-
-  
-
-
-    const orders : Order[] = data ; 
-    const { paidOrders , unpaidOrders , deliveredOrders , shippedOrders  } = FilterOrder(orders) ; 
-     
+    const orders : Order[] | undefined =  query.status === "success" ?  query.data.data  : []  ; 
+    const { paidOrders  , unpaidOrders , deliveredOrders , shippedOrders  } =  orders ? FilterOrder(orders) : {}  ; 
     return (
       <>
       <div className="p-6 bg-gray-900 text-white min-h-screen">
@@ -91,9 +35,10 @@ const Orders = () => {
                           <th className="px-4 py-2 text-left">Created At</th>
                       </tr>
                   </thead>
+                { query.status === "success" ?  
                   <tbody>
                       {filter === 'ALL' ? (
-                          orders.map((element) => (
+                          orders!.map((element) => (
                               <tr key={element.id} className="hover:bg-gray-700 transition-colors">
                                   <td className="px-4 py-2 hover:underline cursor-pointer text-blue-400" onClick={() => navigate(`/app/order?orderId=${element.id}`)}>{element.id}</td>
                                   <td className="px-4 py-2">{element.totalCost}</td>
@@ -102,7 +47,7 @@ const Orders = () => {
                               </tr>
                           ))
                       ) : filter === 'PAID' ? (
-                          paidOrders.map((element) => (
+                          paidOrders!.map((element) => (
                               <tr key={element.id} className="hover:bg-gray-700 transition-colors">
                                   <td className="px-4 py-2 hover:underline cursor-pointer text-blue-400" onClick={() => navigate(`/app/order?orderId=${element.id}`)}>{element.id}</td>
                                   <td className="px-4 py-2">{element.totalCost}</td>
@@ -111,7 +56,7 @@ const Orders = () => {
                               </tr>
                           ))
                       ) : filter === 'UNPAID' ? (
-                          unpaidOrders.map((element) => (
+                          unpaidOrders!.map((element) => (
                               <tr key={element.id} className="hover:bg-gray-700 transition-colors">
                                   <td className="px-4 py-2 hover:underline cursor-pointer text-blue-400" onClick={() => navigate(`/app/order?orderId=${element.id}`)}>{element.id}</td>
                                   <td className="px-4 py-2">{element.totalCost}</td>
@@ -120,7 +65,7 @@ const Orders = () => {
                               </tr>
                           ))
                       ) : filter === 'SHIPPED' ? (
-                          shippedOrders.map((element) => (
+                          shippedOrders!.map((element) => (
                               <tr key={element.id} className="hover:bg-gray-700 transition-colors">
                                   <td className="px-4 py-2 hover:underline cursor-pointer text-blue-400" onClick={() => navigate(`/app/order?orderId=${element.id}`)}>{element.id}</td>
                                   <td className="px-4 py-2">{element.totalCost}</td>
@@ -129,7 +74,7 @@ const Orders = () => {
                               </tr>
                           ))
                       ) : (
-                          deliveredOrders.map((element) => (
+                          deliveredOrders!.map((element) => (
                               <tr key={element.id} className="hover:bg-gray-700 transition-colors">
                                   <td className="px-4 py-2 hover:underline cursor-pointer text-blue-400" onClick={() => navigate(`/app/order?orderId=${element.id}`)}>{element.id}</td>
                                   <td className="px-4 py-2">{element.totalCost}</td>
@@ -138,7 +83,39 @@ const Orders = () => {
                               </tr>
                           ))
                       )}
-                  </tbody>
+                  </tbody> : 
+                  query.status === "pending" ? 
+                  <>
+                  <tr className="">
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  </tr>
+                  <tr className="">
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  </tr>
+                  <tr className="">
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  </tr>
+                  <tr className="">
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  <td className="p-1"> <div className="h-[48px] skeleton"> </div></td>
+                  </tr> 
+                  </>
+                  : 
+                  <tr> 
+                     Error loading orders
+                  </tr>
+                }
               </table>
           </div>
       </div>

@@ -1,37 +1,34 @@
-import ProductCard2 from './ProductCard2'
+
 import type { orderedProduct } from '../interfaces/Order';
+import { AddCommas } from '@/utils/AddCommas';
 
 const OrderedProductCard = ({ orderedProduct }: {
     orderedProduct: orderedProduct 
 }) => {
   
-    const { quantity , product  } = orderedProduct ; 
-
+    const { product  } = orderedProduct ; 
     return (
-        <>
-<div className='flex p-8 rounded-xl bg-gray-800 shadow-lg border border-gray-700'>
-    <div className='w-32 flex-shrink-0'>
-        <ProductCard2 element={product} />
+       
+    <div className='flex p-4 bg-gray-800 gap-2' >
+    <div className='w-15 flex-shrink-0'>
+        <img src='/6s.jpeg' /> 
     </div>
-    <div className='p-2 w-full flex flex-col gap-2'>
-        <div className='text-gray-300 font-bold text-lg'>
-            Rs.{product.cost}/kg
+    <div className='w-full flex flex-col gap-1'>
+        <div className='text-white font-bold text-sm'>
+        ₹{AddCommas(product.cost) }
         </div>
-        <div className='text-gray-300 font-bold text-sm'>
-            Quality: {product.quality}
+        <div className='text-gray-100 font-extrabold text-xs'>
+        ₹{AddCommas(product.cost)} per kg
         </div>
-        <div className='text-gray-400 font-semibold text-xs'>
-            Size: {product.sizeB} || {product.sizeA}
+        <div className='text-gray-100 font-bold text-sm'>
+            {product.quality}
         </div>
-        <div className='text-gray-400 font-semibold text-xs'>
-            Quantity: {quantity} kg
-        </div>
-        <div className='font-bold text-xl text-white mt-2'>
-            Total: Rs.{quantity * product.cost}.00
-        </div>
+        <div className='text-gray-200 font-semibold text-xs'>
+            {product.sizeB}  || {product.sizeA}
+        </div>  
     </div>
-</div>
-        </>
+    </div>
+       
     )
 }
 

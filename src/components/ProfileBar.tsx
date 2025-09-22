@@ -32,19 +32,19 @@ const ProfileBar = ( ) => {
                 <div>Create Profile</div>
             )}
         </div>
-        <div className='w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer' onClick={() => navigate('/app/orders')}>
+        <div className='w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer' onClick={() => { setIsProfileBarOpen(false) ;  navigate('/app/orders') } }>
             My orders
         </div>
-        <div className="w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer" onClick={() => { navigate('/app/account'); }}>
+        <div className="w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer" onClick={() => { setIsProfileBarOpen(false) ;  navigate('/app/account') } }>
             My account
         </div>
         <div className='w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer' onClick={() => { navigate('/app/addresses'); setIsProfileBarOpen(false); }}>
             My addresses
         </div>
-        <div className='w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer'>
+        <div className='w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer' onClick={() => { setIsProfileBarOpen(false) ;   } }>
             Settings
         </div>
-        <div className='w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer' onClick={() => { logout(); setUser({}); location.reload(); }}>
+        <div className='w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer' onClick={() => { logout(); setUser({}); setIsProfileBarOpen(false) ; location.reload(); }}>
             Log out
         </div>
     </div>

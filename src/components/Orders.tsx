@@ -70,36 +70,79 @@ const Orders = () => {
     const { paidOrders , unpaidOrders , deliveredOrders , shippedOrders  } = FilterOrder(orders) ; 
      
     return (
-      <> 
-      <div>
-          <div className="font-bold text-2xl mb-4"> My Orders   </div> 
-          <div className="flex mb-2 gap-8 navbar text-xs sm:text-lg lg:text-xl xl:text-2xl">   
-            <div onClick={() => setFilter('ALL')}       style={ {  fontWeight : filter === 'ALL'       ?  'bolder' : 'normal'    }}>All </div>  
-            <div onClick={() => setFilter('PAID')}      style={ {  fontWeight : filter === 'PAID'      ?  'bolder' : 'normal'    }}>Paid  </div> 
-            <div onClick={() => setFilter('UNPAID')}    style={ {  fontWeight : filter === 'UNPAID'    ?  'bolder' : 'normal'    }}>Unpaid</div> 
-            <div onClick={() => setFilter('SHIPPED')}   style={ {  fontWeight : filter === 'SHIPPED'   ?  'bolder' : 'normal'    }}>Shipped</div>  
-            <div onClick={() => setFilter('DELIVERED')} style={ {  fontWeight : filter === 'DELIVERED' ?  'bolder' : 'normal'    }}>Delivered</div>  
-         </div> 
-
-         <div className="p-4"> 
-         <table className='styled-table text-xs  sm:text-base lg:text-lg  xl:text-xl'> 
-        <thead> 
-        <tr> <th> Id </th>  <th>Price</th> <th>Status</th>  <th>Created At</th>   </tr> 
-        </thead> 
-
-        {  
-          filter === 'ALL' ? 
-          <tbody>{ orders.map(           (element) => <tr>  <td className="hover:underline cursor-pointer" onClick={ ( ) => navigate(`/app/order?orderId=${element.id}`)}> { element.id }</td><td> { element.totalCost} </td> <td> { element.orderStatus} </td> <td> {  element.createdAt ? new Date(element.createdAt).toUTCString()  : '' }   </td>  </tr> ) }   </tbody> :filter === 'PAID'  ?
-          <tbody>{ paidOrders.map(       (element) => <tr>  <td className="hover:underline cursor-pointer" onClick={ ( ) => navigate(`/app/order?orderId=${element.id}`)}> { element.id }</td><td> { element.totalCost} </td> <td> { element.orderStatus} </td> <td> {  element.createdAt ? new Date(element.createdAt).toUTCString()  : '' } </td>  </tr> ) }  </tbody> :filter === 'UNPAID'  ?
-           <tbody>{ unpaidOrders.map(    (element) => <tr>  <td className="hover:underline cursor-pointer" onClick={ ( ) => navigate(`/app/order?orderId=${element.id}`)}> { element.id }</td><td> { element.totalCost} </td> <td> { element.orderStatus} </td> <td> {  element.createdAt ? new Date(element.createdAt).toUTCString()  : '' }  </td>  </tr> ) }  </tbody> :filter === 'SHIPPED'  ?
-           <tbody>{ shippedOrders.map(   (element) => <tr>  <td className="hover:underline cursor-pointer" onClick={ ( ) => navigate(`/app/order?orderId=${element.id}`)}> { element.id }</td><td> { element.totalCost} </td> <td> { element.orderStatus} </td> <td> {  element.createdAt ? new Date(element.createdAt).toUTCString()  : '' }  </td>  </tr> ) }  </tbody> :
-           <tbody>{ deliveredOrders.map( (element) => <tr>  <td className="hover:underline cursor-pointer" onClick={ ( ) => navigate(`/app/order?orderId=${element.id}`)}> { element.id }</td><td> { element.totalCost} </td> <td> { element.orderStatus} </td> <td> {  element.createdAt ? new Date(element.createdAt).toUTCString()  : '' } </td>  </tr> ) }  </tbody> 
-         } 
-        </table>
+      <>
+      <div className="p-6 bg-gray-900 text-white min-h-screen">
+          <div className="font-bold text-3xl mb-6 text-blue-400">My Orders</div>
+          <div className="flex mb-4 gap-4 sm:gap-6 text-sm sm:text-lg lg:text-xl xl:text-2xl font-semibold border-b border-gray-700 pb-2 overflow-x-auto whitespace-nowrap">
+              <div onClick={() => setFilter('ALL')} className={`cursor-pointer transition-colors duration-200 ${filter === 'ALL' ? 'text-white border-b-2 border-white' : 'text-gray-400 hover:text-white'}`}>All</div>
+              <div onClick={() => setFilter('PAID')} className={`cursor-pointer transition-colors duration-200 ${filter === 'PAID' ? 'text-white border-b-2 border-white' : 'text-gray-400 hover:text-white'}`}>Paid</div>
+              <div onClick={() => setFilter('UNPAID')} className={`cursor-pointer transition-colors duration-200 ${filter === 'UNPAID' ? 'text-white border-b-2 border-white' : 'text-gray-400 hover:text-white'}`}>Unpaid</div>
+              <div onClick={() => setFilter('SHIPPED')} className={`cursor-pointer transition-colors duration-200 ${filter === 'SHIPPED' ? 'text-white border-b-2 border-white' : 'text-gray-400 hover:text-white'}`}>Shipped</div>
+              <div onClick={() => setFilter('DELIVERED')} className={`cursor-pointer transition-colors duration-200 ${filter === 'DELIVERED' ? 'text-white border-b-2 border-white' : 'text-gray-400 hover:text-white'}`}>Delivered</div>
           </div>
-      </div> 
-     
-      </> 
+  
+          <div className="p-4 bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-x-auto">
+              <table className="min-w-full text-xs sm:text-base lg:text-lg xl:text-xl text-gray-300">
+                  <thead>
+                      <tr className="border-b border-gray-700 text-white">
+                          <th className="px-4 py-2 text-left">Id</th>
+                          <th className="px-4 py-2 text-left">Price</th>
+                          <th className="px-4 py-2 text-left">Status</th>
+                          <th className="px-4 py-2 text-left">Created At</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {filter === 'ALL' ? (
+                          orders.map((element) => (
+                              <tr key={element.id} className="hover:bg-gray-700 transition-colors">
+                                  <td className="px-4 py-2 hover:underline cursor-pointer text-blue-400" onClick={() => navigate(`/app/order?orderId=${element.id}`)}>{element.id}</td>
+                                  <td className="px-4 py-2">{element.totalCost}</td>
+                                  <td className="px-4 py-2">{element.orderStatus}</td>
+                                  <td className="px-4 py-2">{element.createdAt ? new Date(element.createdAt).toUTCString() : ''}</td>
+                              </tr>
+                          ))
+                      ) : filter === 'PAID' ? (
+                          paidOrders.map((element) => (
+                              <tr key={element.id} className="hover:bg-gray-700 transition-colors">
+                                  <td className="px-4 py-2 hover:underline cursor-pointer text-blue-400" onClick={() => navigate(`/app/order?orderId=${element.id}`)}>{element.id}</td>
+                                  <td className="px-4 py-2">{element.totalCost}</td>
+                                  <td className="px-4 py-2">{element.orderStatus}</td>
+                                  <td className="px-4 py-2">{element.createdAt ? new Date(element.createdAt).toUTCString() : ''}</td>
+                              </tr>
+                          ))
+                      ) : filter === 'UNPAID' ? (
+                          unpaidOrders.map((element) => (
+                              <tr key={element.id} className="hover:bg-gray-700 transition-colors">
+                                  <td className="px-4 py-2 hover:underline cursor-pointer text-blue-400" onClick={() => navigate(`/app/order?orderId=${element.id}`)}>{element.id}</td>
+                                  <td className="px-4 py-2">{element.totalCost}</td>
+                                  <td className="px-4 py-2">{element.orderStatus}</td>
+                                  <td className="px-4 py-2">{element.createdAt ? new Date(element.createdAt).toUTCString() : ''}</td>
+                              </tr>
+                          ))
+                      ) : filter === 'SHIPPED' ? (
+                          shippedOrders.map((element) => (
+                              <tr key={element.id} className="hover:bg-gray-700 transition-colors">
+                                  <td className="px-4 py-2 hover:underline cursor-pointer text-blue-400" onClick={() => navigate(`/app/order?orderId=${element.id}`)}>{element.id}</td>
+                                  <td className="px-4 py-2">{element.totalCost}</td>
+                                  <td className="px-4 py-2">{element.orderStatus}</td>
+                                  <td className="px-4 py-2">{element.createdAt ? new Date(element.createdAt).toUTCString() : ''}</td>
+                              </tr>
+                          ))
+                      ) : (
+                          deliveredOrders.map((element) => (
+                              <tr key={element.id} className="hover:bg-gray-700 transition-colors">
+                                  <td className="px-4 py-2 hover:underline cursor-pointer text-blue-400" onClick={() => navigate(`/app/order?orderId=${element.id}`)}>{element.id}</td>
+                                  <td className="px-4 py-2">{element.totalCost}</td>
+                                  <td className="px-4 py-2">{element.orderStatus}</td>
+                                  <td className="px-4 py-2">{element.createdAt ? new Date(element.createdAt).toUTCString() : ''}</td>
+                              </tr>
+                          ))
+                      )}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </>
      )
 }
 

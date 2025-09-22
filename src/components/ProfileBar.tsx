@@ -23,26 +23,33 @@ const ProfileBar = ( ) => {
     const navigate = useNavigate() ; 
 
     return (
-        <> 
-        <div className='px-4 py-2 rounded-md'>
-            
-            <div className=' w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md cursor-pointer'>
-                { user.profile ? <div>
-                    Hi  {user.profile.firstName}
-                </div>
-                    :
-                    <div onClick = { () => {  setProfileFormOpen(true)  } }>Create Profile</div>}
-            </div>
-
-            <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer' onClick= { () => navigate('/app/orders') }> My orders   </div> 
-            <div className="w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer"  onClick={ () => { navigate('/app/account') }} > My account </div>
-            <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer' onClick={ () =>  { navigate('/app/addresses')  ; setIsProfileBarOpen(false) ;  }  } > My addresses   </div>
-            <div className='w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md  cursor-pointer'  > Settings </div>
-            <div className=' w-[90vw] px-2 py-1  hover:bg-custom-hover text-custom-subheading my-2 rounded-md cursor-pointer' onClick={  () => {  logout(); setUser({}) ; location.reload() ; }}> Log out  </div>
+<>
+    <div className='px-4 py-2 rounded-md bg-gray-800 shadow-lg border border-gray-700 my-4'>
+        <div className='w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer' onClick={() => { setProfileFormOpen(true); }}>
+            {user.profile ? (
+                <div>Hi {user.profile.firstName}</div>
+            ) : (
+                <div>Create Profile</div>
+            )}
         </div>
-        {  profileFormOpen && <Modal> <ProfileForm forEdit={false} setProfileFormOpen={ setProfileFormOpen}  />  </Modal>    }
-        
-        </>
+        <div className='w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer' onClick={() => navigate('/app/orders')}>
+            My orders
+        </div>
+        <div className="w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer" onClick={() => { navigate('/app/account'); }}>
+            My account
+        </div>
+        <div className='w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer' onClick={() => { navigate('/app/addresses'); setIsProfileBarOpen(false); }}>
+            My addresses
+        </div>
+        <div className='w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer'>
+            Settings
+        </div>
+        <div className='w-full px-4 py-2 hover:bg-gray-700 text-blue-400 font-medium rounded-lg transition-colors cursor-pointer' onClick={() => { logout(); setUser({}); location.reload(); }}>
+            Log out
+        </div>
+    </div>
+    {profileFormOpen && <Modal><ProfileForm forEdit={false} setProfileFormOpen={setProfileFormOpen} /></Modal>}
+</>
     )
 }
 

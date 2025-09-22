@@ -24,11 +24,11 @@ const OrderPage = ( ) => {
  
   if(query.status==='pending') { 
    return(
-    <div className='p-2 border bg-white dark:bg-[#212121] rounded-[10px] '> 
-    <div className=" font-bold  ">   
-       Loading order details... 
-    </div> 
-    </div>)
+    <div className="p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700">
+    <div className="font-bold text-lg text-white">
+        Loading order details...
+    </div>
+</div>)
   }
 
   if(query.status==='error') { 
@@ -53,17 +53,18 @@ const OrderPage = ( ) => {
 
   return (
    
-    <div className='p-4  bg-white dark:bg-[#212121] rounded-[10px] shadow-lg shadow-indigo-500 my-[200px]'> 
-    <div className=" font-bold"> 
-      ID : {data.id} <br/> 
-      Ordered At : { data.createdAt &&  new Date(data.createdAt).toUTCString()}  <br/> 
-      Status: {data.orderStatus} <br/> 
-      TotalCost: RS.{data.totalCost} <br/> 
-      <div className='grid gap-2 md:grid-cols-2'> 
-      { data.orderedProducts.map( (element , index ) => <OrderedProductCard orderedProduct={element} key={index} />  ) } 
-      </div>
-    </div>   
+<div className='p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700 my-8'>
+    <div className="font-bold text-white flex flex-col gap-2">
+        <span className="text-xl text-blue-400">ID: {data.id}</span>
+        <span className="text-sm text-gray-400">Ordered At: {data.createdAt && new Date(data.createdAt).toUTCString()}</span>
+        <span className="text-sm text-gray-400">Status: {data.orderStatus}</span>
+        <span className="text-xl text-white">Total Cost: Rs.{data.totalCost}</span>
+        <hr className="my-2 border-gray-700" />
+        <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+            {data.orderedProducts.map((element, index) => <OrderedProductCard orderedProduct={element} key={index} />)}
+        </div>
     </div>
+</div>
     
   )
 }

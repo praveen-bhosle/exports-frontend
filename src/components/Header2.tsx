@@ -4,13 +4,12 @@ import Cart from './Cart';
 import MenuBar from './MenuBar';
 import ProfileBar from './ProfileBar';
 
-
 import { useTheme } from '../hooks/useTheme';
 import toast from 'react-hot-toast';
 
 const Header2 = () => {
 
-    const  isCartOpen           = useStore(state => state.isCartOpen) ;
+    
     const  setIsCartOpen        = useStore(state => state.setIsCartOpen) ; 
     const  user                 = useStore(state => state.user) ;
     const  isProfileBarOpen     = useStore(state => state.isProfileBarOpen) ;
@@ -19,74 +18,70 @@ const Header2 = () => {
     const  setIsMenuBarOpen     = useStore(state => state.setIsMenuBarOpen) ;  
   
   
-
     const {theme } = useTheme() ; 
 
     const navigate = useNavigate() ; 
 
     return ( 
         <> 
-        <div className='fixed top-0 left-0 w-[100%] dark:bg-black  bg-white flex flex-col justify-center  z-10'>
-        <div className='text-black dark:text-white dark:bg-black '>
-            <div className='flex justify-between  mb-2  align-center mx-4 mt-[9px] h-[30px] '>
-                <div className='flex  gap-4  '>
+        <div className='fixed top-0 left-0 w-full bg-white dark:bg-zinc-900 shadow-md dark:shadow-zinc-800 z-50 transition-colors duration-300'>
+            <div className='container mx-auto px-4 py-3 flex items-center justify-between'>
+                <div className='flex items-center gap-6'>
                     {user.username ?
-                        <button className=' rounded-[25px]  overflow-hidden' onClick={
-                            () => {
-                                setIsProfileBarOpen(!isProfileBarOpen);
-                            }
-                        }>
-                            {isProfileBarOpen ? <img src='/close.svg' alt='profile' width={25} height={25} style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } }  /> : <img src='/profile.svg' width={30} height={25} alt='image' style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } }  />}
+                        <button 
+                            className='w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-all duration-300 transform hover:scale-105'
+                            onClick={() => { setIsProfileBarOpen(!isProfileBarOpen) }}
+                        >
+                            {isProfileBarOpen ? (
+                                <img src='/close.svg' alt='close profile' className='w-5 h-5 transition-transform duration-300' style={{ filter: theme === 'dark' ? 'invert(1)' : 'none' }} />
+                            ) : (
+                                <img src='/profile.svg' alt='open profile' className='w-5 h-5 transition-transform duration-300' style={{ filter: theme === 'dark' ? 'invert(1)' : 'none' }} />
+                            )}
                         </button>
                         :
                         <button
-                            onClick={() => {
-                                setIsMenuBarOpen(!isMenuBarOpen)
-                            }}
-                            className=''
+                            onClick={() => { setIsMenuBarOpen(!isMenuBarOpen) }}
+                            className='w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-all duration-300 transform hover:scale-105'
                         >
                             {isMenuBarOpen ? (
-                                <img src='/close.svg' width={25} height={25} alt='image' style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } }  />
+                                <img src='/close.svg' alt='close menu' className='w-5 h-5 transition-transform duration-300' style={{ filter: theme === 'dark' ? 'invert(1)' : 'none' }} />
                             ) : (
-                                <img alt='image' src='/menu.svg' width={25} height={25}  style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } }   /> 
+                                <img alt='open menu' src='/menu.svg' className='w-5 h-5 transition-transform duration-300' style={{ filter: theme === 'dark' ? 'invert(1)' : 'none' }} /> 
                             )}
                         </button>}
-                    <Link to='/app'> <img src='/home.svg' alt='home' width={25} height={25}  style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } } className='relative top-[2px]'   />   </Link>
+                    <Link to='/app' className='w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-all duration-300 transform hover:scale-105'> 
+                        <img src='/home.svg' alt='home' className='w-5 h-5' style={{ filter: theme === 'dark' ? 'invert(1)' : 'none' }} /> 
+                    </Link>
                 </div>
-                <div className='flex  gap-2'>
-                    <div className='relative bottom-[4px]'>
-                        <Link to="/" className=''>
-                            <img src='/logp.jpeg' alt='logo' width={40} height={40} />
-                        </Link>
-                    </div>
-                    <div className='font-bold'>YK Devout Exports</div>
+
+                <div className='flex items-center gap-3'>
+                    <Link to="/" className='flex items-center gap-2'>
+                        <img src='/logp.jpeg' alt='logo' className='w-10 h-10 rounded-full' />
+                        <span className='font-bold text-lg text-black dark:text-white'>YK Devout Exports</span>
+                    </Link>
                 </div>
-                <div className='flex gap-2'>
-                    <div>
-                        <button
-                            onClick={() => { 
-                                if( user.username ) setIsCartOpen(true) 
-                                else { toast.error('You must login to access cart.') ;  navigate('/auth/login');  } 
-                            }}>
-                            <img src='/cart.svg' alt='cart' width={25} height={25} style={ { filter :  theme ==='dark' ?  'invert(1)' : 'none' } }  />
-                        </button>
-                    </div>
+                
+                <div className='flex items-center'>
+                    <button
+                        onClick={() => { 
+                            if( user.username ) setIsCartOpen(true) 
+                            else { toast.error('You must login to access cart.'); navigate('/auth/login'); } 
+                        }}
+                        className='w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-all duration-300 transform hover:scale-105'
+                    >
+                        <img src='/cart.svg' alt='cart' className='w-5 h-5' style={{ filter: theme === 'dark' ? 'invert(1)' : 'none' }} />
+                    </button>
                 </div>
             </div>
             {isMenuBarOpen && (
                 <MenuBar />
             )}
-            {isCartOpen && (
-                <Cart />
-            )}
             {isProfileBarOpen && (
-                <ProfileBar   />
-            )
-            }
-        </div>
+                <ProfileBar />
+            )}
         </div>
         </> 
     )
 }
 
-export default Header2; 
+export default Header2;

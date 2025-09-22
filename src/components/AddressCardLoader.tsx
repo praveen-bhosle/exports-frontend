@@ -1,6 +1,6 @@
 const AddressCardLoader = () => {
   return (
-    <div className="shimmer w-[290px] h-[178px]"></div>
+    <div className="skeleton w-[290px] h-[178px]"></div>
   )
 }
 

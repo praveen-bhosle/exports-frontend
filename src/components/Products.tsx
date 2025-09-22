@@ -12,17 +12,19 @@ const Products = () => {
     const query = useQuery({ queryKey: ['products'], queryFn: getProducts })  
     const [searchParams, setSearchParams] = useSearchParams(); 
     const [quality, setQuality] = useState(searchParams?.get('quality') ? searchParams?.get('quality') : 'handpicked');  
-    useEffect( () => {  
+
+    useEffect(() => {  
         if(query.status === 'success' && quality) {  
-        searchParams.set( 'quality' , quality ) ; setSearchParams(searchParams) ;  
-    }
-    }  , [quality] ) 
+            searchParams.set('quality', quality); 
+            setSearchParams(searchParams);  
+        }
+    }, [quality, query.status, searchParams, setSearchParams]);
 
     if (query.status === 'pending') {
         return (
-            <>
+            <div className="container mx-auto px-4 py-8">
                 <Header3 quality={quality} setQuality={setQuality} /> 
-                <div className="mt-2 gap-2 grid grid-cols-2  sm:grid-cols-3   md:grid-cols-3 xl:grid-cols-4" > 
+                <div className="grid grid-cols-2 gap-4 mt-6 md:grid-cols-3 lg:grid-cols-4"> 
                      <ProductCardLoader /> 
                      <ProductCardLoader /> 
                      <ProductCardLoader />
@@ -33,67 +35,48 @@ const Products = () => {
                      <ProductCardLoader /> 
                      <ProductCardLoader />
                 </div>
-                
-            </>
-        )
+            </div>
+        );
     }
 
     if (query.status === 'error') {
         return (
-            <>  
+            <div className="container mx-auto px-4 py-8 text-center text-red-500">  
                <Header3 quality={quality} setQuality={setQuality} />
-                <div> Error fetching products </div>
-            </>
-        )
+               <div className="mt-4">Error fetching products. Please try again later.</div>
+            </div>
+        );
     }  
 
-    const products: Product [] = query.data ; 
+    const products: Product[] = query.data;
+    const { hP, shP, mP } = FilterProducts(products);
 
-    const { hP , shP , mP } = FilterProducts(products) ;  
-    
-    if(quality=='handpicked') {  
-    return ( 
-        <>
-            <div>
-                <Header3 quality={quality} setQuality={setQuality} />
-                <div className='grid grid-cols-2 gap-2 mt-2 sm:grid-cols-3   md:grid-cols-3 xl:grid-cols-4'>
-                    {hP.map((product, index) =>  { return (  <ProductCard key={index} element={product} /> ) }  )}
-                </div>
-            </div>
-        </>
-    ) }
-    else if(quality=='semi-handpicked') {  
-        return ( 
-            <>
-                <div>
-                    <Header3 quality={quality} setQuality={setQuality} />
-                    <div className='grid grid-cols-2 gap-2 mt-2 sm:grid-cols-3   md:grid-cols-3 xl:grid-cols-4'>
-                        {shP.map((product, index) =>  { return (  <ProductCard key={index} element={product} /> ) }  )}
-                    </div>
-                </div>
-            </>
-        ) }
-
-    else if (quality=='machine-picked') { 
-        return ( 
-            <>
-                <div>
-                    <Header3 quality={quality} setQuality={setQuality} />
-                    <div className='grid grid-cols-2 gap-2 mt-2 sm:grid-cols-3   md:grid-cols-3 xl:grid-cols-4'>
-                        {mP.map((product, index) =>  { return (  <ProductCard key={index} element={product} /> ) }  )}
-                    </div>
-                </div>
-            </>
-        ) 
-    } 
-    else { 
-        return( 
-            <div>
+    const renderProductCards = (productArray: Product[]) => (
+        <div className="container mx-auto px-4 py-8">
             <Header3 quality={quality} setQuality={setQuality} />
-             <div> Invalid query parameters.</div>
+            <div className="grid grid-cols-2 gap-4 mt-6 md:grid-cols-3 lg:grid-cols-4">
+                {productArray.map((product, index) => (
+                    <ProductCard key={index} element={product} />
+                ))}
             </div>
-        )
+        </div>
+    );
+    
+    switch (quality) {
+        case 'handpicked':
+            return renderProductCards(hP);
+        case 'semi-handpicked':
+            return renderProductCards(shP);
+        case 'machine-picked':
+            return renderProductCards(mP);
+        default:
+            return (
+                <div className="container mx-auto px-4 py-8 text-center text-red-500">
+                    <Header3 quality={quality} setQuality={setQuality} />
+                    <div className="mt-4">Invalid quality parameter.</div>
+                </div>
+            );
     }
-}
+};
 
-export default Products
+export default Products;

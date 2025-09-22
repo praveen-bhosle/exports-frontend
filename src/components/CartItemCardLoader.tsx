@@ -1,7 +1,7 @@
 const CartItemCardLoader = () => {
   return (
    
-        <div className="h-[184px]  shimmer"> 
+        <div className="h-[184px]  skeleton"> 
         </div>
   )
 }

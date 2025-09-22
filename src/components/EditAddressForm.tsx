@@ -25,37 +25,42 @@ const EditAddressForm = ({address , stateFn  ,  editMutation } : {address : Addr
 
   return (
 
-    <div className="flex flex-col ">
-    <h1 className="font-bold text-xl"> Edit  address </h1> <br/> 
-    <button className="w-full  p-2 font-bold cursor-pointer border-2" >Autofill your current location.</button> 
-
-    <form  className="form"  onSubmit={ (e) => {   const myPromise =  handleSubmit(e) ;   toast.promise(myPromise ,  { loading : "Editing the address."  ,  success : "Address edited successfully." })  }  } > 
-        <label htmlFor="fullname"  > Fullname * </label> 
-        <input type="text" name="fullname"  id="fullname" defaultValue={address.fullName} required />
-        <label htmlFor="mobil_number"> Mobile number *   </label>
-        <input name="mobile_number" required  defaultValue={address.mobileNumber} /> 
-        <label htmlFor="pincode"> Pincode * </label>
-        <input name="pincode"  required defaultValue={address.pincode} />
-        <label htmlFor="addr1"> Flat, House no., Building, Company, Apartment * </label>
-        <input name="addr1" required  defaultValue={address.addr1} /> 
-        <label htmlFor="addr2"> Area, Street, Sector, Village </label>
-        <input  name="addr2" defaultValue={address.addr2} /> 
-        <label htmlFor="landmark"> Landmark </label>
-        <input  name="landmark" defaultValue={ address.landmark } />
-        <label htmlFor="city"> Town/City *  </label>
-        <input name="city" required defaultValue= { address.city } /> 
-        <label htmlFor="state"> State *  </label>
-        <input  name="state" required defaultValue= {address.state } />
-        <label htmlFor="country">  Country/Region *  </label>
-        <input name="country" required  defaultValue= {address.country } /> 
-        { !address.isDefault && <label htmlFor="isDefault">Make this my default address <input type="checkbox" name="isDefault"  className="relative top-[2px] left-[2px]" />   </label> } 
-        <SubmitButton2 text="Edit address" /> 
+<div className="flex flex-col gap-6 p-6 bg-gray-800 rounded-2xl shadow-2xl border border-gray-700 w-full max-w-lg mx-auto text-white">
+    <h1 className="font-bold text-2xl text-blue-400 text-center">Edit address</h1>
+    <button className="w-full p-3 font-bold cursor-pointer border border-gray-600 rounded-lg text-gray-300 hover:bg-gray-700 transition-colors">
+        Autofill your current location.
+    </button>
+    <form className="flex flex-col gap-4" onSubmit={(e) => { const myPromise = handleSubmit(e); toast.promise(myPromise, { loading: "Editing the address.", success: "Address edited successfully." }); }}>
+        <label htmlFor="fullname" className="text-gray-300"> Fullname <span className="text-red-500">*</span> </label>
+        <input type="text" name="fullname" id="fullname" defaultValue={address.fullName} required className="p-3 rounded-md bg-gray-900 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200" />
+        <label htmlFor="mobil_number" className="text-gray-300"> Mobile number <span className="text-red-500">*</span> </label>
+        <input name="mobile_number" required defaultValue={address.mobileNumber} className="p-3 rounded-md bg-gray-900 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200" />
+        <label htmlFor="pincode" className="text-gray-300"> Pincode <span className="text-red-500">*</span> </label>
+        <input name="pincode" required defaultValue={address.pincode} className="p-3 rounded-md bg-gray-900 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200" />
+        <label htmlFor="addr1" className="text-gray-300"> Flat, House no., Building, Company, Apartment <span className="text-red-500">*</span> </label>
+        <input name="addr1" required defaultValue={address.addr1} className="p-3 rounded-md bg-gray-900 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200" />
+        <label htmlFor="addr2" className="text-gray-300"> Area, Street, Sector, Village </label>
+        <input name="addr2" defaultValue={address.addr2} className="p-3 rounded-md bg-gray-900 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200" />
+        <label htmlFor="landmark" className="text-gray-300"> Landmark </label>
+        <input name="landmark" defaultValue={address.landmark} className="p-3 rounded-md bg-gray-900 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200" />
+        <label htmlFor="city" className="text-gray-300"> Town/City <span className="text-red-500">*</span> </label>
+        <input name="city" required defaultValue={address.city} className="p-3 rounded-md bg-gray-900 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200" />
+        <label htmlFor="state" className="text-gray-300"> State <span className="text-red-500">*</span> </label>
+        <input name="state" required defaultValue={address.state} className="p-3 rounded-md bg-gray-900 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200" />
+        <label htmlFor="country" className="text-gray-300"> Country/Region <span className="text-red-500">*</span> </label>
+        <input name="country" required defaultValue={address.country} className="p-3 rounded-md bg-gray-900 border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200" />
+        {!address.isDefault && (
+            <label htmlFor="isDefault" className="flex items-center gap-2 text-gray-300">
+                <input type="checkbox" name="isDefault" className="form-checkbox text-blue-500 rounded border-gray-600 bg-gray-900 focus:ring-blue-500 transition-colors" />
+                Make this my default address
+            </label>
+        )}
+        <SubmitButton2 text="Edit address" />
     </form>
-
-    
-    <button onClick={ () => stateFn(false)   }  className="cursor-pointer font-bold bg-black text-white rounded-[5px]" > Go back </button>
-
-    </div>
+    <button onClick={() => stateFn(false)} className="mt-4 px-4 py-2 bg-gray-600 rounded-lg text-white hover:bg-gray-700 transition-colors">
+        Go back
+    </button>
+</div>
   )
 }
 

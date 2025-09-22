@@ -1,5 +1,4 @@
 import { getOTPApi, resetPasswordApi, verifyOTPApi } from '@/api/AuthApi';
-import SubmitButton2 from '@/UIComponents/SubmitButton2';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -68,58 +67,68 @@ const ForgotPassword = () => {
   },[])
 
   return (
-    <div> 
-        <div className='flex flex-col gap-2 text-xl font-bold'>
-
-            { mode === 'state1' ?  
-            <>
-            <form onSubmit={ (e) =>  { const myPromise = getOTP(e)   ;  toast.promise( myPromise ,  { loading : "Sending otp" } ) }}>
-            <label className='block  mb-[2px]' htmlFor='username'>Username</label> 
-            <input
-                type='text'
-                className='p-2 outline-none text-xs rounded-md bg-[#E9EAF2] dark:text-white dark:bg-black  text-black  w-full border-[1px] dark:border-white'
-                id='username'
-                name='username'
-                defaultValue=''
-                required
-            />
-            <SubmitButton2 text="Get OTP" />  
+<div>
+    <div className='flex flex-col gap-4 p-6 bg-gray-800 rounded-2xl shadow-2xl border border-gray-700 w-full max-w-lg mx-auto text-white'>
+        {mode === 'state1' ?
+            <form onSubmit={(e) => { const myPromise = getOTP(e); toast.promise(myPromise, { loading: "Sending OTP" }); }}>
+                <label className='block mb-2 text-gray-300' htmlFor='username'>Username</label>
+                <input
+                    type='text'
+                    className='p-3 outline-none text-sm rounded-md bg-gray-900 text-white w-full border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200'
+                    id='username'
+                    name='username'
+                    defaultValue=''
+                    required
+                />
+                <button
+                    type="submit"
+                    className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg transform transition-transform duration-200 hover:scale-105"
+                >
+                    Get OTP
+                </button>
             </form>
-            </> : 
-            mode ==='state2' ?
-            <> 
-            <form onSubmit={ (e) =>  { const myPromise = verifyOTP(e)   ;  toast.promise( myPromise ,  { loading : "Verifying otp" } ) }}>
-            <label className='block  mb-[2px]' htmlFor='code'>OTP</label> 
-            <input
-                type='text'
-                className='p-2 outline-none text-xs rounded-md bg-[#E9EAF2] dark:text-white dark:bg-black  text-black  w-full border-[1px] dark:border-white'
-                id='code'
-                name='code'
-                defaultValue=''
-                required
-            />
-            <SubmitButton2 text="Verify OTP" />  
-            </form>
-            </> : 
-            <> 
-            <form onSubmit={ (e) =>  { const myPromise = resetPassword(e)   ;  toast.promise( myPromise ,  { loading : "Resetting password.." } ) }}>
-            <label className='block  mb-[2px]' htmlFor='password'>Password</label> 
-            <input
-                type='text'
-                className='p-2 outline-none text-xs rounded-md bg-[#E9EAF2] dark:text-white dark:bg-black  text-black  w-full border-[1px] dark:border-white'
-                id='password'
-                name='password'
-                defaultValue=''
-                required
-            />
-            <SubmitButton2 text="Reset password" />  
-            </form>
-            </>
-            } 
-            <hr /> 
-            <div className='text-xs'> Please do not refresh this page until password reset is done.</div>
-        </div> 
+            :
+            mode === 'state2' ?
+                <form onSubmit={(e) => { const myPromise = verifyOTP(e); toast.promise(myPromise, { loading: "Verifying OTP" }); }}>
+                    <label className='block mb-2 text-gray-300' htmlFor='code'>OTP</label>
+                    <input
+                        type='text'
+                        className='p-3 outline-none text-sm rounded-md bg-gray-900 text-white w-full border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200'
+                        id='code'
+                        name='code'
+                        defaultValue=''
+                        required
+                    />
+                    <button
+                        type="submit"
+                        className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg transform transition-transform duration-200 hover:scale-105"
+                    >
+                        Verify OTP
+                    </button>
+                </form>
+                :
+                <form onSubmit={(e) => { const myPromise = resetPassword(e); toast.promise(myPromise, { loading: "Resetting password.." }); }}>
+                    <label className='block mb-2 text-gray-300' htmlFor='password'>Password</label>
+                    <input
+                        type='text'
+                        className='p-3 outline-none text-sm rounded-md bg-gray-900 text-white w-full border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200'
+                        id='password'
+                        name='password'
+                        defaultValue=''
+                        required
+                    />
+                    <button
+                        type="submit"
+                        className="mt-4 w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg transform transition-transform duration-200 hover:scale-105"
+                    >
+                        Reset password
+                    </button>
+                </form>
+        }
+        <hr className="my-4 border-gray-700" />
+        <div className='text-xs text-gray-400'>Please do not refresh this page until password reset is done.</div>
     </div>
+</div>
   )
 }
 

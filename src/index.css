@@ -47,6 +47,40 @@
    @apply dark:bg-[#121212] 
 }
 
-.shimmer { 
-    @apply bg-gradient-to-r from-[#2a2a2a] via-[#333333] to-[#222222] animate-pulse rounded-lg shadow-lg   
+.skeleton {
+    background-color: #2a2a2a; 
+    border-radius: 0.5rem; 
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); 
+    
+    position: relative; 
+    overflow: hidden;  
+  }
+  
+
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    
+    
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(51, 51, 51, 0.8), 
+      transparent
+    );
+    
+    transform: translateX(-100%);
+    
+   
+    animation: shimmer 1.5s infinite;
+  }
+  
+ 
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
 }

@@ -40,25 +40,28 @@ const Addresses = () => {
 
   return ( 
     <>
-    <div> 
-    <div className="text-xl font-bold">Your Addresses</div>    
-    { defaultAddress && 
-    <>
-     <span className="text-lg font-bold"> Default Address  </span>
-      <div>
-        <AddressCard address={ defaultAddress }  editMutation = { editMutation} deleteMutation = { deleteMutation} />
-      </div>
-    </>
-     } 
-    <br/> 
-    <hr/>
-    <br/>   
-    <div className="grid sm:grid-cols-2 gap-2  md:grid-cols-3 xl:grid-cols-4">  
-      { remainingAddresses.map( (address,index) => { if(address) return (<AddressCard address={ address }   key={index}  editMutation = { editMutation} deleteMutation = { deleteMutation}  />) }  ) }   
+    <div className="flex flex-col gap-6 p-4 md:p-8 bg-gray-900 text-white min-h-screen">
+    <div className="text-3xl font-extrabold text-blue-400">Your Addresses</div>
+    {defaultAddress && (
+        <>
+            <span className="text-xl font-bold text-gray-300">Default Address</span>
+            <div>
+                <AddressCard address={defaultAddress} editMutation={editMutation} deleteMutation={deleteMutation} />
+            </div>
+        </>
+    )}
+    <hr className="my-4 border-gray-700" />
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        {remainingAddresses.map((address, index) => {
+            if (address) return (<AddressCard address={address} key={index} editMutation={editMutation} deleteMutation={deleteMutation} />);
+            return null;
+        })}
     </div>
-    <button  onClick={ () => setAddstate(true) } className="button">  Add an address  </button>     
+    <button onClick={() => setAddstate(true)} className="mt-6 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg transform transition-transform duration-200 hover:scale-105 self-start">
+        Add an address
+    </button>
+    {addState && <Modal children={<AddressForm stateFn={setAddstate} mutationFn={postMutation} firstAddress={firstAddress} />} />}
     </div>
-     {addState  && <Modal children= {<AddressForm  stateFn = { setAddstate } mutationFn  = { postMutation} firstAddress = { firstAddress}   />} />  } 
     </>
   )
   }

@@ -21,9 +21,9 @@ const VerifyEmail2 = () => {
     }
 
   return (
-    <div className="border dark:bg-white dark:text-black text-center font-bold rounded-[10px] cursor-pointer" onClick={ () => { const myPromise = getRequest ;  toast.promise( myPromise ,  { loading : 'Verifying email.' } )}  }>    
-        Click here to verify the email.
-    </div> 
+    <div className="p-6 bg-gray-800 text-white text-center font-bold rounded-xl shadow-lg border border-gray-700 cursor-pointer transition-transform duration-300 hover:scale-105" onClick={() => { const myPromise = getRequest; toast.promise(myPromise, { loading: 'Verifying email.' }); }}>
+    Click here to verify the email.
+</div>
   )
 }
 

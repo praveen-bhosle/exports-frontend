@@ -1,11 +1,10 @@
 const Modal = ( {    children   } : { children : React.ReactNode   }) => {  
   return (
-  <div className="fixed inset-0 bg-gray-300  dark:bg-gray-900 flex items-center justify-center z-50">
-    <div className="bg-white dark:bg-black p-6 rounded-xl shadow-lg relative  mx-[20px]"> 
-       { children}
+<div className="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 p-4 transition-opacity duration-300">
+    <div className="bg-gray-800 p-8 rounded-2xl shadow-2xl relative w-full max-w-lg mx-auto transform scale-100 opacity-100 transition-all duration-300">
+        {children}
     </div>
-  </div> 
-  ) 
+</div>  ) 
 }
 
 export default Modal ; 

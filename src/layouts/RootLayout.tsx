@@ -31,7 +31,7 @@ const RootLayout = () => {
         } }   ,[user] )  ; 
 
     return (
-        <div className=" bg-[#FAFAFA] dark:bg-[#111111] dark:text-gray-100 ">
+        <div className=" bg-[#FAFAFA] dark:bg-[#101828] dark:text-gray-100 ">
            <Header />
            <div className="mt-[47px]  pt-[2px] min-h-[76vh] "> 
                <Toaster /> 

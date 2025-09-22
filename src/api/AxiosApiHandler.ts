@@ -40,7 +40,8 @@ export const AxiosRequest = async ({url,body, method    }: {url: string , body?:
                      return { data : "Refresh token expired or password changed. Please login again." }  ; 
                    }
                    logout() ;
-                   return { data : "cookie not sent."} ; 
+                   console.log(JSON.stringify(e.response)) 
+                   return { data : "cookie not sent." } ; 
               
                 }
                 else { 

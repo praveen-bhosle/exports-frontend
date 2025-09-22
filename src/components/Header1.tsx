@@ -18,7 +18,7 @@ const Header = () =>  {
                 <div className='flex gap-5 items-center text-sm font-medium'>
                     {user.username ? (
                         <>
-                            <a href='/app/profile'>
+                            <a href='/app/account'>
                                 <img 
                                     src='/profile.svg' 
                                     alt='profile' 

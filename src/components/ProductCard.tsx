@@ -86,7 +86,7 @@ const ProductCard = ({ element }: { element: Product }) => {
             </div>
 
             <div className='mt-auto pt-2'>
-                <SheetTrigger asChild > 
+            <SheetTrigger asChild> 
                 <button
                     onClick={() => {
                         if (user.username) {
@@ -104,7 +104,7 @@ const ProductCard = ({ element }: { element: Product }) => {
                 >
                     Add to cart
                 </button>
-                </SheetTrigger>
+            </SheetTrigger>
             </div>
         </div>
     );

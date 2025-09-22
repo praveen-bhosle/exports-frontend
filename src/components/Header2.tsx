@@ -1,11 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useStore } from '../state/Store'
-import Cart from './Cart';
+
 import MenuBar from './MenuBar';
 import ProfileBar from './ProfileBar';
 
 import { useTheme } from '../hooks/useTheme';
 import toast from 'react-hot-toast';
+import { SheetTrigger } from './ui/sheet';
 
 const Header2 = () => {
 
@@ -62,6 +63,7 @@ const Header2 = () => {
                 </div>
                 
                 <div className='flex items-center'>
+                <SheetTrigger asChild>
                     <button
                         onClick={() => { 
                             if( user.username ) setIsCartOpen(true) 
@@ -71,6 +73,7 @@ const Header2 = () => {
                     >
                         <img src='/cart.svg' alt='cart' className='w-5 h-5' style={{ filter: theme === 'dark' ? 'invert(1)' : 'none' }} />
                     </button>
+                </SheetTrigger>
                 </div>
             </div>
             {isMenuBarOpen && (

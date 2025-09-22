@@ -1,9 +1,9 @@
-import {  useState } from 'react';
-import {   useCartMutations } from '../hooks/useCartQueryMutations';
+import { useState } from 'react';
+import { useCartMutations } from '../hooks/useCartQueryMutations';
 import type { CartItem } from '../interfaces/CartItem';
 import toast from 'react-hot-toast';
 import { useTheme } from '../hooks/useTheme';
-
+import { AddCommas } from '@/utils/AddCommas';
 
 const CartItemCard = ({ cartItem }: {
     cartItem: CartItem
@@ -17,7 +17,7 @@ const CartItemCard = ({ cartItem }: {
 
     const [ value , setValue ] = useState(quantity) ;  
 
-    const [editMode ,setEditMode] = useState(false) ;  
+    const [ editMode ,setEditMode ] = useState(false) ;  
 
     const handleClick = async () => { 
          await putMutation.mutateAsync(  { cartItemId : id , quantity :  value}) ; 
@@ -30,22 +30,22 @@ const CartItemCard = ({ cartItem }: {
     const {theme } = useTheme() ;
 
     return (
-        <>
+    <>
     <div className='flex p-4 bg-gray-800 gap-2' >
     <div className='w-20 flex-shrink-0'>
         <img src='/6s.jpeg' /> 
     </div>
     <div className='w-full flex flex-col gap-1'>
-        <div className='text-gray-300 font-bold text-sm'>
-        ₹{quantity * cartItem.product.cost}
+        <div className='text-white font-bold text-sm'>
+        ₹{AddCommas(quantity * cartItem.product.cost) }
         </div>
-        <div className='text-gray-300 font-bold text-xs'>
-        ₹{cartItem.product.cost} per kg
+        <div className='text-gray-100 font-extrabold text-xs'>
+        ₹{AddCommas(cartItem.product.cost)} per kg
         </div>
-        <div className='text-gray-300 font-bold text-sm'>
+        <div className='text-gray-100 font-bold text-sm'>
             {product.quality}
         </div>
-        <div className='text-gray-400 font-semibold text-xs'>
+        <div className='text-gray-100 font-semibold text-xs'>
             {product.sizeB} || {product.sizeA}
         </div>
         <div className='flex justify-between items-center'>
@@ -83,9 +83,9 @@ const CartItemCard = ({ cartItem }: {
         </div>
         {editMode && <div className='text-xs text-gray-500'>Valid Range: 500-5000 kg</div>}
     </div>
-</div>
-
-        </>
+    </div>
+    <hr className='text-white'/> 
+    </>
     )
 }
 

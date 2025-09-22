@@ -9,17 +9,17 @@ import Cart from "@/components/Cart";
 
 const AppLayout = () => { 
     return (
+      <Sheet> 
         <div>
-            <Sheet> 
             <Header2 />
             <div className="p-2"> 
-            <Outlet /> 
+            <Outlet />  
             </div> 
-            <SheetContent className="p-0">
-              <Cart/> 
+            <SheetContent className="p-0 w-[350px]"> 
+            <Cart/>  
             </SheetContent>
-            </Sheet> 
         </div>
+      </Sheet>
     )
 }
 
